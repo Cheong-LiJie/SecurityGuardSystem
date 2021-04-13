@@ -10,7 +10,7 @@ if (strlen($_SESSION['clientmsaid']==0)) {
 <!DOCTYPE HTML>
 <html>
 <head>
-	<title>Client Management Sysytem || Manage Client </title>
+	<title>Security Guard Management System|| Manage Guard </title>
 	
 	<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
 	<!-- Bootstrap Core CSS -->
@@ -42,7 +42,7 @@ if (strlen($_SESSION['clientmsaid']==0)) {
 					<div class="sub-heard-part">
 						<ol class="breadcrumb m-b-0">
 							<li><a href="dashboard.php">Home</a></li>
-							<li class="active">Manage Clients</li>
+							<li class="active">Manage Guard</li>
 
 						</ol>
 					</div>
@@ -50,18 +50,19 @@ if (strlen($_SESSION['clientmsaid']==0)) {
 					<div class="graph-visual tables-main">
 						
 					
-						<h3 class="inner-tittle two">Manage Clients <a name="add" id="add" class="btn btn-primary" href="add-client.php" role="button">Add client</a></h3>
+						<h3 class="inner-tittle two">Manage Guard <a name="add" id="add" class="btn btn-primary" href="add-client.php" role="button">Add Guard</a></h3>
 
 						<div class="graph">
 							<div class="tables">
 								<table class="table" border="1"> <thead> <tr> <th>#</th> 
 									<th>Account ID</th>
-									 <th>Account Type</th> 
-									 <th>Contact Name</th>
-									 <th>Company Name</th>
-									 <th>Mobile Number</th>
-									 <th>Setting</th>
-									  </tr>
+									 <th>Name</th> 
+									 <th>Phone</th>
+									 <th>Race</th>
+									 <th>Country</th>
+									 <th>Working Permit Due Date</th>
+									  <th>Action</th>
+                                      </tr>
 									   </thead>
 									    <tbody>
 									    	<?php
@@ -81,8 +82,10 @@ foreach($results as $row)
 									        <td><?php  echo htmlentities($row->AccountType);?></td>
 									         <td><?php  echo htmlentities($row->ContactName);?></td> 
 									         <td><?php  echo htmlentities($row->CompanyName);?></td>
+                                             <td><?php  echo htmlentities($row->CompanyName);?></td>
 									         <td><?php  echo htmlentities($row->Workphnumber);?></td>
-									        <td><a href="edit-client-details.php?editid=<?php echo $row->ID;?>">Edit</a>  ||  <a href="add-client-services.php?addid=<?php echo $row->ID;?>">Assign Services</a></td>
+
+									        <td><a href="edit-client-details.php?editid=<?php echo $row->ID;?>">Edit</a></td>
 									     </tr>
 									     <?php $cnt=$cnt+1;}} ?>
 									     </tbody> </table> 

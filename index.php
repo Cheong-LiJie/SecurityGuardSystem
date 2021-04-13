@@ -58,8 +58,8 @@
                 <div id="home" class="w3ls-banner d-flex  align-items-center justify-content-center">
                     <div class="bnr-w3pvt text-center">
                         <h4>Welcome to!!</h4>
-                        <h2 class="bnr-txt-w3">Client Management System</h2>
-                        <p>Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae</p>
+                        <h2 class="bnr-txt-w3">Security Guard Management System!!!</h2>
+                        
                        
                     </div>
                 </div>

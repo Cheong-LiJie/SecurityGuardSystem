@@ -48,6 +48,7 @@ if (strlen($_SESSION['clientmsaid']==0)) {
 						
 					
 						<h3 class="inner-tittle two">Invoice </h3>
+						<a href="bwdates-reports-ds.php" class="btn btn-primary"> B/w dates Reports</a>
 						<div class="graph">
 							<div class="tables">
 								<table class="table" border="1"> <thead> <tr> <th>#</th> 
