@@ -37,7 +37,7 @@ foreach($results as $row)
             <li id="menu-academico" ><a href="#"><i class="fa fa-table"></i> <span> Service</span> <span class="fa fa-angle-right" style="float: right"></span></a>
                 <ul id="menu-academico-sub" >
                     <li id="menu-academico-avaliacoes" ><a href="add-services.php"> Add Services</a></li><span class="fa fa-angle-right" style="float: right"></span>
-                    <li id="menu-academico-boletim" ><a href="manage-services.php">Manage Services</a><span class="fa fa-angle-right" style="float: right"></span></li>
+                    <li id="menu-academico-boletim" ><a href="manage-services.php">Manage Account</a><span class="fa fa-angle-right" style="float: right"></span></li>
                 </ul>
             </li>
             <li><a href="account-list.php"><i class="fa fa-table"></i> <span>Account</span></a></li>
