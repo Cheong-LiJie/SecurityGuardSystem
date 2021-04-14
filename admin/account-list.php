@@ -56,6 +56,7 @@ if (strlen($_SESSION['clientmsaid']==0)) {
 							<div class="tables">
 								<table class="table" border="1"> <thead> <tr> <th>#</th> 
 									<th>Account ID</th>
+                                    <th>Picture</th>
 									 <th>Name</th> 
 									 <th>Phone</th>
 									 <th>Race</th>
@@ -66,7 +67,7 @@ if (strlen($_SESSION['clientmsaid']==0)) {
 									   </thead>
 									    <tbody>
 									    	<?php
-$sql="SELECT * from tblclient";
+$sql="SELECT * from tblaccount";
 $query = $dbh -> prepare($sql);
 $query->execute();
 $results=$query->fetchAll(PDO::FETCH_OBJ);
@@ -79,11 +80,12 @@ foreach($results as $row)
 									     <tr class="active">
 									      <th scope="row"><?php echo htmlentities($cnt);?></th>
 									       <td><?php  echo htmlentities($row->AccountID);?></td>
-									        <td><?php  echo htmlentities($row->AccountType);?></td>
-									         <td><?php  echo htmlentities($row->ContactName);?></td> 
-									         <td><?php  echo htmlentities($row->CompanyName);?></td>
-                                             <td><?php  echo htmlentities($row->CompanyName);?></td>
-									         <td><?php  echo htmlentities($row->Workphnumber);?></td>
+									        <td><?php  echo htmlentities($row->Picture);?></td>
+									         <td><?php  echo htmlentities($row->Name);?></td> 
+									         <td><?php  echo htmlentities($row->Phone);?></td>
+                                             <td><?php  echo htmlentities($row->Race);?></td>
+									         <td><?php  echo htmlentities($row->Country);?></td>
+                                             <td><?php  echo htmlentities($row->WorkingPermitDueDate);?></td>
 
 									        <td><a href="edit-client-details.php?editid=<?php echo $row->ID;?>">Edit</a></td>
 									     </tr>
