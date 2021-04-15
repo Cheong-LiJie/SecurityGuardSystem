@@ -50,7 +50,8 @@ if (strlen($_SESSION['clientmsaid']==0)) {
 					<div class="graph-visual tables-main">
 						
 					
-						<h3 class="inner-tittle two">Manage Guard <a name="add" id="add" class="btn btn-primary" href="add-client.php" role="button">Add Guard</a></h3>
+						<h3 class="inner-tittle two">Manage Guard 
+                        <a name="add" id="add" class="btn btn-primary" href="add-account.php" role="button">Add Guard</a></h3>
 
 						<div class="graph">
 							<div class="tables">
@@ -80,7 +81,7 @@ foreach($results as $row)
 									     <tr class="active">
 									      <th scope="row"><?php echo htmlentities($cnt);?></th>
 									       <td><?php  echo htmlentities($row->AccountID);?></td>
-									        <td><?php  echo htmlentities($row->Picture);?></td>
+                                           <td><img style="height:60px;width:60px" src="http://localhost/SecurityGuardSystem/admin/images/<?php echo htmlentities($row->Picture);?>"></td>
 									         <td><?php  echo htmlentities($row->Name);?></td> 
 									         <td><?php  echo htmlentities($row->Phone);?></td>
                                              <td><?php  echo htmlentities($row->Race);?></td>
