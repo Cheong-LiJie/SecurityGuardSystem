@@ -53,7 +53,7 @@
 
                 </script>
               </li>
-              <p style="padding-top: 10px;color: white;text-align: center;">Client Management System</p>                   
+              <p style="padding-top: 10px;color: white;text-align: center;">Security Guard Management System</p>                   
               <div class="clearfix"></div>  
             </ul>
           </div>
