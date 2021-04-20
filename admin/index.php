@@ -6,7 +6,7 @@ include('includes/dbconnection.php');
 if(isset($_POST['login'])) 
   {
     $username=$_POST['username'];
-    $password=md5($_POST['password']);
+    $password=($_POST['password']);
     $sql ="SELECT ID FROM tbladmin WHERE UserName=:username and Password=:password";
     $query=$dbh->prepare($sql);
     $query-> bindParam(':username', $username, PDO::PARAM_STR);
@@ -29,7 +29,7 @@ echo "<script>alert('Invalid Details');</script>";
 <!DOCTYPE HTML>
 <html>
 <head>
-	<title>Client Management System||Login Page</title>
+	<title>Security Guard Management System||Login Page</title>
 
 	<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
 	<!-- Bootstrap Core CSS -->
@@ -50,7 +50,7 @@ echo "<script>alert('Invalid Details');</script>";
 	<div class="error_page">
 
 		<div class="error-top">
-			<h2 class="inner-tittle page">CMS</h2>
+			<h2 class="inner-tittle page">Welcome</h2>
 			<div class="login">
 				
 				<div class="buttons login">

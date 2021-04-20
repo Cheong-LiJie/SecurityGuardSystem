@@ -3,7 +3,7 @@
 <html lang="zxx">
 
 <head>
-    <title>Client Management System || Home Page</title>
+    <title>Security Guard Management System || Home Page</title>
     
     <script>
         addEventListener("load", function () {
@@ -33,7 +33,7 @@
                 <div class="header-agile">
                     <h1>
                         <a class="navbar-brand" href="index.php">
-                           CMS
+                        Security Guard Management System
                         </a>
                     </h1>
                 </div>
@@ -78,7 +78,7 @@
                         <div class="footer-bottom py-lg-5 py-3">
                           
                             <div class="footer-copy text-center">
-                                <p class="text-dark">Client Management System @ 2019
+                                <p class="text-dark">Security Guard Management System @ 2019
                                     
                                 </p>
                             </div>

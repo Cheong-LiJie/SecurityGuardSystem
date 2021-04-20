@@ -55,7 +55,7 @@ if (strlen($_SESSION['clientmsaid']==0)) {
 						<div class="col-md-4 widget">
 							<div class="stats-left ">
 								<?php 
-$sql ="SELECT ID from tblclient ";
+$sql ="SELECT client_id from tblclient ";
 $query = $dbh -> prepare($sql);
 $query->execute();
 $results=$query->fetchAll(PDO::FETCH_OBJ);
@@ -72,7 +72,7 @@ $tclients=$query->rowCount();
 						<div class="col-md-4 widget states-mdl">
 							<div class="stats-left">
 							<?php 
-$sql1 ="SELECT ID from tblservices ";
+$sql1 ="SELECT serviceID from tblservices ";
 $query1 = $dbh -> prepare($sql1);
 $query1->execute();
 $results1=$query1->fetchAll(PDO::FETCH_OBJ);
@@ -92,7 +92,7 @@ $tser=$query1->rowCount();
 								<?php
 $sql6="select  sum(tblservices.ServicePrice) as todaysale
  from tblinvoice 
-  join tblservices  on tblservices.ID=tblinvoice.ServiceId where date(PostingDate)=CURDATE()";
+  join tblservices  on tblservices.serviceID=tblinvoice.ServiceId where date(PostingDate)=CURDATE()";
 
   $query6 = $dbh -> prepare($sql6);
   $query6->execute();
@@ -127,7 +127,7 @@ $todays_sale=$row6->todaysale;
 								<?php
 $sql7="select  sum(tblservices.ServicePrice) as totalcost
  from tblinvoice 
-  join tblservices  on tblservices.ID=tblinvoice.ServiceId where date(PostingDate)=CURDATE()-1;";
+  join tblservices  on tblservices.serviceID=tblinvoice.ServiceId where date(PostingDate)=CURDATE()-1;";
 
   $query7 = $dbh -> prepare($sql7);
   $query7->execute();
@@ -153,7 +153,7 @@ $yest_sale=$row7->totalcost;
 								<?php
 $sql8="select  sum(tblservices.ServicePrice) as totalcost
  from tblinvoice 
-  join tblservices  on tblservices.ID=tblinvoice.ServiceId where date(PostingDate)>=(DATE(NOW()) - INTERVAL 7 DAY);";
+  join tblservices  on tblservices.serviceID=tblinvoice.ServiceId where date(PostingDate)>=(DATE(NOW()) - INTERVAL 7 DAY);";
 
   $query8 = $dbh -> prepare($sql8);
   $query8->execute();
@@ -180,7 +180,7 @@ $sevendays_sale=$row8->totalcost;
 								<?php
 $sql9="select  sum(tblservices.ServicePrice) as totalcost
  from tblinvoice 
-  join tblservices  on tblservices.ID=tblinvoice.ServiceId";
+  join tblservices  on tblservices.serviceID=tblinvoice.ServiceId";
 
   $query9 = $dbh -> prepare($sql9);
   $query9->execute();

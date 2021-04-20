@@ -27,7 +27,7 @@ $clientmsaid=$_SESSION['clientmsaid'];
  
 $sql="insert into tblclient(AccountID,AccountType,ContactName,CompanyName,Address,City,State,ZipCode,Workphnumber,Cellphnumber,Otherphnumber,Email,WebsiteAddress,Notes,Password)values(:acctid,:accttype,:cname,:comname,:address,:city,:state,:zcode,:wphnumber,:cellphnumber,:ophnumber,:email,:websiteadd,:notes,:password)";
 $query=$dbh->prepare($sql);
-$query->bindParam(':acctid',$acctid,PDO::PARAM_STR);
+$query->bindParam('acctid',$acctid,PDO::PARAM_STR);
 $query->bindParam(':accttype',$accttype,PDO::PARAM_STR);
 $query->bindParam(':cname',$cname,PDO::PARAM_STR);
 $query->bindParam(':comname',$comname,PDO::PARAM_STR);

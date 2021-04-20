@@ -61,7 +61,7 @@ if (strlen($_SESSION['clientmsaid']==0)) {
 									 <th>Name</th> 
 									 <th>Phone</th>
 									 <th>Race</th>
-									 <th>Country</th>
+									 <th>Nationality</th>
 									 <th>Working Permit Due Date</th>
 									  <th>Action</th>
                                       </tr>
@@ -85,7 +85,7 @@ foreach($results as $row)
 									         <td><?php  echo htmlentities($row->Name);?></td> 
 									         <td><?php  echo htmlentities($row->Phone);?></td>
                                              <td><?php  echo htmlentities($row->Race);?></td>
-									         <td><?php  echo htmlentities($row->Country);?></td>
+									         <td><?php  echo htmlentities($row->Nationality);?></td>
                                              <td><?php  echo htmlentities($row->WorkingPermitDueDate);?></td>
 
 									        <td><a href="edit-client-details.php?editid=<?php echo $row->ID;?>">Edit</a></td>
