@@ -62,16 +62,19 @@ if($query->rowCount() > 0)
 foreach($results as $row)
 {               ?>
 	<h2 style="padding-left: 100px">
-		WELCOME BACK! <?php  echo $row->CompanyName;?>
+		Welcome Back !! <?php  echo $row->CompanyName;?>
 	</h2>
 							<?php $cnt=$cnt+1;}} ?>
-	<br><br><br>
-	<h3 style="padding-left: 100px">
-		Glad to see you back, <?php  echo $row->CompanyName;?>! 
-	</h3>
-	<h3 style="padding-left: 100px">
-		Any comment or complaint about our services want to let us know? Feel free to send us feedback.			
-	</h3>	
+     <br>
+     <br>
+     <br>
+    <h2 style="padding-left:100px">
+        Glad to see you back, <?php  echo $row->CompanyName;?>! </h2>
+    <h2 style="padding-left:100px">   
+        Hope you have a nice work and remember to smile!
+    </h2>
+    		
+					
 		<?php include_once('includes/footer.php');?>
 		
 	</div>

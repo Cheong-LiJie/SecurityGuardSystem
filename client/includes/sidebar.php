@@ -34,12 +34,15 @@ foreach($results as $row)
         <ul id="menu" >
             <li><a href="dashboard.php"><i class="fa fa-tachometer"></i> <span>Dashboard</span></a></li>
 
+            <li><a href="service-control.php"><i class="fa fa-wrench"></i> <span>Service Control</span></a></li>
             
-            <li><a href="invoices.php"><i class="fa fa-file-text-o"></i> <span>Invoices</span></a></li>
+            <li><a href="invoices.php"><i class="fa fa-file-text-o"></i> <span>Invoice Module</span></a></li>
 
-           
-            <li><a href="search-invoices.php"><i class="fa fa-search"></i> <span>Search Invoice</span></a></li>
-         
+            <li><a href="customer-module.php"><i class="fa fa-users"></i> <span>Customer Module</span></a></li>
+
+            <li><a href="feedback.php"><i class="fa fa-comment"></i> <span>Feedback</span></a></li>
+            
+            <li><a href="feedback.php"><i class="fa fa-user"></i> <span>My Account</span></a></li>
         </ul>
     </div>
 </div>

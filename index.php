@@ -47,6 +47,9 @@
                 <button type="button" class="btn btn-block mt-lg-5 mt-3 w3ls-btn p-1 btn-theme text-white  text-uppercase font-weight-bold" 
                     >
                     <a class="nav-link" href="client/index.php">Client</a>
+                    <button type="button" class="btn btn-block mt-lg-5 mt-3 w3ls-btn p-1 btn-theme text-white  text-uppercase font-weight-bold" 
+                    >
+                    <a class="nav-link" href="guard/index.php">Guard</a>
                 </button>
                 </ul>
                 
