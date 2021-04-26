@@ -49,9 +49,9 @@ if (strlen($_SESSION['clientmsuid']==0)) {
 			<?php include_once('includes/header.php');?>
 			
 			
-								<?php
+<?php
 $uid=$_SESSION['clientmsuid'];
-$sql="SELECT CompanyName from  tblclient where ID=:uid";
+$sql="SELECT CompanyName from  tblclient where client_id=:uid";
 $query = $dbh -> prepare($sql);
 $query->bindParam(':uid',$uid,PDO::PARAM_STR);
 $query->execute();

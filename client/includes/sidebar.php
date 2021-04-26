@@ -9,7 +9,7 @@
     <div class="down">
     <?php
 $uid=$_SESSION['clientmsuid'];
-$sql="SELECT CompanyName from  tblclient where ID=:uid";
+$sql="SELECT CompanyName from  tblclient where client_id=:uid";
 $query = $dbh -> prepare($sql);
 $query->bindParam(':uid',$uid,PDO::PARAM_STR);
 $query->execute();
@@ -35,6 +35,8 @@ foreach($results as $row)
             <li><a href="dashboard.php"><i class="fa fa-tachometer"></i> <span>Dashboard</span></a></li>
 
             <li><a href="service-control.php"><i class="fa fa-wrench"></i> <span>Service Control</span></a></li>
+
+            <li><a href="service-request.php"><i class="fa fa-wrench"></i> <span>Service Request</span></a></li>
             
             <li><a href="invoices.php"><i class="fa fa-file-text-o"></i> <span>Invoice Module</span></a></li>
 

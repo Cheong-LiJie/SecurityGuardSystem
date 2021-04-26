@@ -1,6 +1,5 @@
 <?php
 session_start();
-error_reporting(0);
 include('includes/dbconnection.php');
 if (strlen($_SESSION['clientmsaid']==0)) {
   header('location:logout.php');
@@ -9,54 +8,37 @@ if (strlen($_SESSION['clientmsaid']==0)) {
   {
 
 $clientmsaid=$_SESSION['clientmsaid'];
- $acctid=mt_rand(100000000, 999999999);
- $accttype=$_POST['accounttype'];
- $password=md5($_POST['password']);
  $cname=$_POST['cname'];
  $comname=$_POST['comname'];
+ $password=($_POST['password']);
  $address=$_POST['address'];
  $city=$_POST['city'];
  $state=$_POST['state'];
- $zcode=$_POST['zcode'];
+ $postcode=$_POST['postcode'];
  $wphnumber=$_POST['wphnumber'];
  $cellphnumber=$_POST['cellphnumber'];
- $ophnumber=$_POST['ophnumber'];
  $email=$_POST['email'];
- $websiteadd=$_POST['websiteadd'];
- $notes=$_POST['notes'];
+ $status=$_POST['status'];
+
  
-$sql="insert into tblclient(AccountID,AccountType,ContactName,CompanyName,Address,City,State,ZipCode,Workphnumber,Cellphnumber,Otherphnumber,Email,WebsiteAddress,Notes,Password)values(:acctid,:accttype,:cname,:comname,:address,:city,:state,:zcode,:wphnumber,:cellphnumber,:ophnumber,:email,:websiteadd,:notes,:password)";
+$sql="insert into tblclient(ContactName,CompanyName,Password,Address,City,State,Postcode,Workphnumber,Cellphnumber,Email,Status)values(:cname,:comname,:password,:address,:city,:state,:postcode,:wphnumber,:cellphnumber,:email,:status)";
 $query=$dbh->prepare($sql);
-$query->bindParam('acctid',$acctid,PDO::PARAM_STR);
-$query->bindParam(':accttype',$accttype,PDO::PARAM_STR);
 $query->bindParam(':cname',$cname,PDO::PARAM_STR);
 $query->bindParam(':comname',$comname,PDO::PARAM_STR);
+$query->bindParam(':password',$password,PDO::PARAM_STR);
 $query->bindParam(':address',$address,PDO::PARAM_STR);
 $query->bindParam(':city',$city,PDO::PARAM_STR);
 $query->bindParam(':state',$state,PDO::PARAM_STR);
-$query->bindParam(':zcode',$zcode,PDO::PARAM_STR);
+$query->bindParam(':postcode',$postcode,PDO::PARAM_STR);
 $query->bindParam(':wphnumber',$wphnumber,PDO::PARAM_STR);
 $query->bindParam(':cellphnumber',$cellphnumber,PDO::PARAM_STR);
-$query->bindParam(':ophnumber',$ophnumber,PDO::PARAM_STR);
 $query->bindParam(':email',$email,PDO::PARAM_STR);
-$query->bindParam(':websiteadd',$websiteadd,PDO::PARAM_STR);
-$query->bindParam(':notes',$notes,PDO::PARAM_STR);
-$query->bindParam(':password',$password,PDO::PARAM_STR);
- $query->execute();
+$query->bindParam(':status',$status,PDO::PARAM_STR);
+$query->execute();
 
-   $LastInsertId=$dbh->lastInsertId();
-   if ($LastInsertId>0) {
     echo '<script>alert("Client has been added.")</script>';
-echo "<script>window.location.href ='add-client.php'</script>";
+echo "<script>document.location='manage-client.php'</script>"; 
   }
-  else
-    {
-         echo '<script>alert("Something Went Wrong. Please try again")</script>';
-    }
-
-  
-}
-
 ?>
 <!DOCTYPE HTML>
 <html>
@@ -106,43 +88,36 @@ echo "<script>window.location.href ='add-client.php'</script>";
 <div class="graph-form">
 <div class="form-body">
 <form method="post"> 
-									
-	<div class="form-group"> <label for="exampleInputEmail1">Account Type</label> 
-		<select  name="accounttype"  class="form-control select2" required='true'>
-		<option value="">Choose Account Type</option>
-		<option value="Active Account">Active Account</option>
-		<option value="Inactive Account">Inactive Account</option>
-		<option value="Contact/Lead">Contact/Lead</option>
-		<option value="Unknown">Unknown</option>
-		
-	</select> </div>
-	<div class="form-group"> <label for="exampleInputEmail1">Contact Name</label> <input type="text" name="cname" placeholder="Contact Name" value="" class="form-control" required='true'> </div>
-	<div class="form-group"> <label for="exampleInputEmail1">Company Name</label> <input type="text" name="comname" placeholder="Company Name" value="" class="form-control" required='true'> </div>
-	<div class="form-group"> <label for="exampleInputEmail1">Address</label> <textarea type="text" name="address" placeholder="Address" value="" class="form-control" required='true' rows="4" cols="3"></textarea> </div>
-	<div class="form-group"> <label for="exampleInputEmail1">City</label> <input type="text" name="city" placeholder="City" value="" class="form-control" required='true'> </div>
-	<div class="form-group"> <label for="exampleInputEmail1">State</label> <input type="text" name="state" placeholder="State" value="" class="form-control" required='true'> </div>
-	<div class="form-group"> <label for="exampleInputEmail1">Zip Code</label> <input type="text" name="zcode" placeholder="Zip Code" value="" class="form-control" required='true'> </div>
-	<div class="form-group"> <label for="exampleInputEmail1">Work Phone Number</label><input type="text" name="wphnumber" value="" placeholder="Work Phone Number"  class="form-control" maxlength='10' required='true' pattern="[0-9]+"> </div>
-	<div class="form-group"> <label for="exampleInputEmail1">Cell Phone Number</label><input type="text" name="cellphnumber" value="" placeholder="Cell Phone Number"  class="form-control" maxlength='10' pattern="[0-9]+"> </div>
-	<div class="form-group"> <label for="exampleInputEmail1">Other Phone Number</label><input type="text" name="ophnumber" value="" placeholder="Work Phone Number"  class="form-control" maxlength='10' pattern="[0-9]+"> </div>
-	<div class="form-group"> <label for="exampleInputEmail1">Email Address</label> <input type="email" name="email" value="" placeholder="Email address" class="form-control" required='true'> </div> 
-<div class="form-group"> <label for="exampleInputEmail1">Password</label>
-	<input placeholder="password" type="password" name="password" required="true" id="password" class="form-control">
-</div>
-	<div class="form-group"> <label for="exampleInputPassword1">Website Address</label> <input type="text" name="websiteadd" value="" placeholder="Website Address" required='true' class="form-control"> </div>
-	<div class="form-group"> <label for="exampleInputEmail1">Notes</label> <textarea type="text" name="notes" placeholder="Notes" value="" class="form-control" required='true' rows="4" cols="3"></textarea> </div>
 
-	
-	 <button type="submit" class="btn btn-default" name="submit" id="submit">Save</button> </form> 
+<div class="row">
+<div class="form-group col-xs-4"> <label>Contact Name</label> <input  type="text" name="cname"  value="" class="form-control" required='true'> </div>
+<div class="form-group col-xs-4"> <label>Company Name</label> <input type="text" name="comname" value="" class="form-control" required='true'> </div>
+<div class="form-group col-xs-4"> <label>Password</label> <input  type="password" name="password"  value="" class="form-control" required='true'> </div>
 </div>
+
+<div class="row">
+<div class="form-group col-xs-3"> <label>Address</label> <input type="text" name="address"  value="" class="form-control" required='true'> </div>
+<div class="form-group col-xs-3"> <label>City</label> <input type="text" name="city"  value="" class="form-control" required='true'> </div>
+<div class="form-group col-xs-3"> <label>State</label> <input type="text" name="state"  value="" class="form-control" required='true'> </div>
+<div class="form-group col-xs-3"> <label>Postcode</label> <input type="text" name="postcode"  value="" class="form-control" required='true'> </div>
 </div>
+
+<div class="row">
+<div class="form-group col-xs-3"> <label>Work Phone No</label> <input type="text" name="wphnumber"  value="" class="form-control" required='true'> </div>
+<div class="form-group col-xs-3"> <label>Cell Phone No</label> <input type="text" name="cellphnumber"  value="" class="form-control" required='true'> </div>
+<div class="form-group col-xs-3"> <label>Email</label> <input type="text" name="email"  value="" class="form-control" required='true' > </div>
+<div class="form-group col-xs-3"> <label>Status</label> <input type="text" name="status"  value="Active" class="form-control" required='true' readonly> </div>
+</div> 
+<div>
+<button type="submit" class="btn btn-default" name="submit" id="submit">Save</button> </form> 
+</div>
+</div> 
 </div> 
 </div>
 <?php include_once('includes/footer.php');?>
 </div>
 </div>		
-<?php include_once('includes/sidebar.php');?>
-<div class="clearfix"></div>		
+<?php include_once('includes/sidebar.php');?>	
 </div>
 <script>
 		var toggle = true;

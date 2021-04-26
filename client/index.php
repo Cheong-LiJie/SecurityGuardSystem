@@ -1,22 +1,22 @@
 <?php
 session_start();
-error_reporting(0);
+
 include('includes/dbconnection.php');
 
 if(isset($_POST['login'])) 
   {
     $email=$_POST['email'];
-    $password=md5($_POST['password']);
-    $sql ="SELECT ID FROM tblclient WHERE Email=:email and Password=:password";
+    
+    $sql ="SELECT client_id FROM tblclient WHERE Email=:email ";
     $query=$dbh->prepare($sql);
     $query-> bindParam(':email', $email, PDO::PARAM_STR);
-$query-> bindParam(':password', $password, PDO::PARAM_STR);
+
     $query-> execute();
     $results=$query->fetchAll(PDO::FETCH_OBJ);
     if($query->rowCount() > 0)
 {
 foreach ($results as $result) {
-$_SESSION['clientmsuid']=$result->ID;
+$_SESSION['clientmsuid']=$result->client_id;
 }
 $_SESSION['login']=$_POST['username'];
 echo "<script type='text/javascript'> document.location ='dashboard.php'; </script>";

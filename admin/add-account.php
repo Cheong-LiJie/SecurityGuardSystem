@@ -1,16 +1,12 @@
 <?php
 session_start();
-error_reporting(0);
 include('includes/dbconnection.php');
 if (strlen($_SESSION['clientmsaid']==0)) {
   header('location:logout.php');
   } else{
     if(isset($_POST['submit']))
   {
-
-$accountmsaid=$_SESSION['clientmsaid'];
- $acctid=mt_rand(100000000, 999999999);
- $picture=$_POST['picture'];
+$clientmsaid=$_SESSION['clientmsaid'];
  $name=$_POST['name'];
  $pw=md5($_POST['pw']);
  $phone=$_POST['phone'];
@@ -18,52 +14,40 @@ $accountmsaid=$_SESSION['clientmsaid'];
  $race=$_POST['race'];
  $nationality=$_POST['nationality'];
  $age=$_POST['age'];
- $gender=$_POST['gender'];
  $position=$_POST['position'];
  $ppno=$_POST['ppno'];
  $visastatus=$_POST['visastatus'];
- $medicalcheck=$_POST['medicalcheck'];
+ $picture=$_POST['picture'];
+ $medical=$_POST['medical'];
  $ppcopy=$_POST['ppcopy'];
  $permitdate=$_POST['permitdate'];
+ $other=$_POST['other'];
  
-$sql="insert into tblaccount(`AccountID`, `Picture`, `Name`, `Password`, `Phone`, `Status`, `Race`, `Nationality`, `Age`, `Gender`, `Position`,`PassportNo.`, `Visa Status`, `Medical check-up`, `Passport Copy`, `WorkingPermitDueDate`))";
+ 
+$sql="insert into tblaccount( Name, Password,Phone, WorkingPermitDueDate, Race, Nationality, Age, Position,PassportNo, Visa_Status,Status,Picture, Medical_CheckUp, Passport_Copy,other) values(:name,:pw,:phone,:permitdate,:race,:nationality,:age,:position,:ppno,:visastatus,:status,:picture,:medical,:ppcopy,:other)";
 $query=$dbh->prepare($sql);
-$query->bindParam(':acctid',$acctid,PDO::PARAM_STR);
-$query->bindParam(':picture',$picture,PDO::PARAM_STR);
+$acctid=$dbh->lastInsertId();
 $query->bindParam(':name',$name,PDO::PARAM_STR);
 $query->bindParam(':pw',$pw,PDO::PARAM_STR);
 $query->bindParam(':phone',$phone,PDO::PARAM_STR);
-$query->bindParam(':status',$status,PDO::PARAM_STR);
+$query->bindParam(':permitdate',$permitdate,PDO::PARAM_STR);
 $query->bindParam(':race',$race,PDO::PARAM_STR);
 $query->bindParam(':nationality',$nationality,PDO::PARAM_STR);
 $query->bindParam(':age',$age,PDO::PARAM_STR);
 $query->bindParam(':position',$position,PDO::PARAM_STR);
 $query->bindParam(':ppno',$ppno,PDO::PARAM_STR);
 $query->bindParam(':visastatus',$visastatus,PDO::PARAM_STR);
-$query->bindParam(':medicalcheck',$medicalcheck,PDO::PARAM_STR);
+$query->bindParam(':status',$status,PDO::PARAM_STR);
+$query->bindParam(':picture',$picture,PDO::PARAM_STR);
+$query->bindParam(':medical',$medical,PDO::PARAM_STR);
 $query->bindParam(':ppcopy',$ppcopy,PDO::PARAM_STR);
-$query->bindParam(':permitdate',$permitdate,PDO::PARAM_STR);
- $query->execute();
+$query->bindParam(':other',$other,PDO::PARAM_STR);
 
-   $LastInsertId=$dbh->lastInsertId();
-   if ($LastInsertId>0) {
-    echo '<script>alert("Client has been added.")</script>';
-echo "<script>window.location.href ='add-account.php'</script>";
-  }
-  else
-    {
-         echo '<script>alert("Something Went Wrong. Please try again")</script>';
-    }
-
-  
+$query->execute();
+echo "<script type='text/javascript'>alert('Successfully added new guard!');</script>";
+echo "<script>document.location='account-list.php'</script>";   
 }
-
-$image_name=$_FILES['banner_image']['name'];
-       $temp = explode(".", $image_name);
-        $newfilename = round(microtime(true)) . '.' . end($temp);
-       $imagepath="uploads/".$newfilename;
-       move_uploaded_file($_FILES["banner_image"]["tmp_name"],$imagepath);
-
+  
 ?>
 
 <!DOCTYPE HTML>
@@ -118,20 +102,8 @@ $image_name=$_FILES['banner_image']['name'];
 <form method="post"> 
 
 <div class="row">
-<div class="form-group col-xs-3"> <label>Account ID</label> <input type="text" name="acctid"  value="" class="form-control" required='true'> </div>
 <div class="form-group col-xs-3"> <label>Name</label> <input type="text" name="name" value="" class="form-control" required='true'> </div>
-<div class="form-group col-xs-3"> <label>Password</label> <input type="text" name="pw"  value="" class="form-control" required='true'> </div>
-<div class="form-group col-xs-3"> <label>Confirm password</label> <input type="text"  value="" class="form-control" required='true'> </div>
-</div>
-<div class="row">
-<div class="form-group col-xs-3"> <label>Phone</label> <input type="text" name="phone"  value="" class="form-control" required='true'> </div>
-<div class="form-group col-xs-3"> <label for="exampleInputEmail1">Work Permit due date</label> <input type="text" name="permitdate"  value="" class="form-control" required='true'> </div>
-<div class="form-group col-xs-3"> <label>Race</label> <input type="text" name="race"  value="" class="form-control" required='true'> </div>
-<div class="form-group col-xs-3"> <label>Nationality</label> <input type="text" name="nationality"  value="" class="form-control" required='true'> </div>
-</div>
-<div class="row">
-<div class="form-group col-xs-3"> <label>Age</label> <input type="text" name="age"  value="" class="form-control" required='true'> </div>
-<div class="form-group col-xs-3"> <label for="exampleInputEmail1">Passport Number</label> <input type="text" name="ppno"  value="" class="form-control" required='true'> </div>
+<div class="form-group col-xs-3"> <label>Password</label> <input  type="password" name="pw"  value="" class="form-control" required='true'> </div>
 <div class="form-group col-xs-3"> <label>Position</label>
 	<select style="height:50px" name="position"  class="form-control" required='true'>
 		<option value="Manager">Manager</option>
@@ -139,23 +111,33 @@ $image_name=$_FILES['banner_image']['name'];
 		<option value="Junior">Junior guard</option>
 		<option value="Trainee">Trainee</option>
 	</select> </div>
-<div class="form-group col-xs-3"> <label for="exampleInputEmail1">Visa Status</label>
+	<div class="form-group col-xs-3"> <label>Visa Status</label>
 	<select style="height:50px" name="visastatus"  class="form-control" required='true'>
 		<option value="Immigrant">Immigrant Visa</option>
 		<option value="Non-immigrant">Non-immigrant Visa</option>
 		<option value="Temporary worker">Temporary Worker Visa</option>
 	</select> </div> 
-</div> 
+</div>
 <div class="row">
+<div class="form-group col-xs-3"> <label>Phone</label> <input type="text" name="phone"  value="" class="form-control" required='true'> </div>
+<div class="form-group col-xs-3"> <label>Work Permit due date</label> <input type="date" name="permitdate"  value="" class="form-control" required='true'> </div>
+<div class="form-group col-xs-3"> <label>Race</label> <input type="text" name="race"  value="" class="form-control" required='true'> </div>
+<div class="form-group col-xs-3"> <label>Nationality</label> <input type="text" name="nationality"  value="" class="form-control" required='true'> </div>
+</div>
+<div class="row">
+<div class="form-group col-xs-3"> <label>Age</label> <input type="text" name="age"  value="" class="form-control" required='true'> </div>
+<div class="form-group col-xs-3"> <label>Passport Number</label> <input type="text" name="ppno"  value="" class="form-control" required='true'> </div>
 <div class="form-group col-xs-3"> <label>Status</label> <input type="text" name="status"  value="Active" class="form-control" required='true' readonly> </div>
 </div> 
 <div class="row">
-<div class="form-group col-xs-6"> <label>Profile Image</label><input type="file" onchange="readURL(this)" name="profile" ><img id="profile" src="#" alt="Profile Picture" width="100px" height="100px" /></div>
-<div class="form-group col-xs-6"> <label>Medical Check up</label><input type="file" onchange="readURL(this)" name="medical" ><img id="medical" src="#Medical" alt="Medical check up" width="100px" height="100px" /></div>
+</div> 
+<div class="row">
+<div class="form-group col-xs-6"> <label>Profile Image</label><input type="file" name="picture" ><!--<img id="profile" src="#" alt="Profile Picture" width="100px" height="100px" />--></div>
+<div class="form-group col-xs-6"> <label>Medical Check up</label><input type="file" name="medical" ></div>
 </div>
 <div class="row">
-<div class="form-group col-xs-6"> <label>Passport copy</label><input type="file" onchange="readURL(this)" name="passport" ><img id="passport" src="#" alt="Passport copy" width="100px" height="100px" /></div>
-<div class="form-group col-xs-6"> <label>Other</label><input type="file" onchange="readURL(this)" name="other" ><img id="other" src="#" alt="Other" width="100px" height="100px" /></div>
+<div class="form-group col-xs-6"> <label>Passport copy</label><input type="file"  name="ppcopy" ></div>
+<div class="form-group col-xs-6"> <label>Other</label><input type="file" name="other" ></div>
 </div>
 <div>
 <button type="submit" class="btn btn-default" name="submit" id="submit">Save</button> </form> 
@@ -166,10 +148,10 @@ $image_name=$_FILES['banner_image']['name'];
 <?php include_once('includes/footer.php');?>
 </div>
 </div>		
-<?php include_once('includes/sidebar.php');?>
-<div class="clearfix"></div>		
+<?php include_once('includes/sidebar.php');?>		
 </div>
-<script type="text/javascript">
+
+<!--<script type="text/javascript">
 
 var reader2 = new FileReader();
     function readURL(input) {
@@ -194,7 +176,7 @@ var reader2 = new FileReader();
             reader.readAsDataURL(input.files[0]);
 			reader2.readAsDataURL(input.files[1]);
         }
-</script>
+</script>-->
 <script>
 		var toggle = true;
 		$(".sidebar-icon").click(function() {                
@@ -214,18 +196,12 @@ var reader2 = new FileReader();
 			toggle = !toggle;
 		});
 	</script>
-
 	<!--js -->
 	<script src="js/jquery.nicescroll.js"></script>
 	<script src="js/scripts.js"></script>
 
 	<!-- Bootstrap Core JavaScript -->
 	<script src="js/bootstrap.min.js"></script>
-
-
-
 </body>
-
-
 </html>
 <?php }  ?>
