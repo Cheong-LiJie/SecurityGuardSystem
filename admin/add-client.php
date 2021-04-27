@@ -4,10 +4,9 @@ include('includes/dbconnection.php');
 if (strlen($_SESSION['clientmsaid']==0)) {
   header('location:logout.php');
   } else{
-    if(isset($_POST['submit']))
-  {
+    if(isset($_POST['submit'])){
 
-$clientmsaid=$_SESSION['clientmsaid'];
+ $clientmsaid=$_SESSION['clientmsaid'];
  $cname=$_POST['cname'];
  $comname=$_POST['comname'];
  $password=($_POST['password']);
@@ -36,7 +35,7 @@ $query->bindParam(':email',$email,PDO::PARAM_STR);
 $query->bindParam(':status',$status,PDO::PARAM_STR);
 $query->execute();
 
-    echo '<script>alert("Client has been added.")</script>';
+echo '<script>alert("Client has been added.")</script>';
 echo "<script>document.location='manage-client.php'</script>"; 
   }
 ?>

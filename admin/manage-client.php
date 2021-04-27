@@ -91,7 +91,7 @@ foreach($results as $row)
 									         <td><?php  echo htmlentities($row->Workphnumber);?></td>
 									         <td><?php  echo htmlentities($row->State);?></td>
 											 <td><?php  echo htmlentities($row->Status);?></td>
-									        <td><a href="edit-client-details.php?editid=<?php echo $row->client_id;?>">Edit</a>  ||  <a href="add-client-services.php?addid=<?php echo $row->client_id;?>">Assign Services</a></td>
+									        <td><a href="edit-client-details.php?editid=<?php echo $row->client_id;?>">Edit</a></td>
 									     </tr>
 									     <?php $cnt=$cnt+1;}} ?>
 									     </tbody> </table> 

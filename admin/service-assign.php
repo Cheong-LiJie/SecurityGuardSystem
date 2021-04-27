@@ -42,6 +42,8 @@ if (strlen($_SESSION['clientmsaid']==0)) {
 						<ol class="breadcrumb m-b-0">
 							<li><a href="dashboard.php">Home</a></li>
 							<li class="active">Service Assignation</li>
+							
+
 
 						</ol>
 					</div>
@@ -49,8 +51,7 @@ if (strlen($_SESSION['clientmsaid']==0)) {
 					<div class="graph-visual tables-main">
 					
 		
-						<h3 class="inner-tittle two">Service Assignation</h3>
-
+						
 						<div class="graph">
 							<div class="tables" >
 							<!--<label>Show <select size="1" name="data-table_length" aria-controls="data-table">
@@ -62,11 +63,13 @@ if (strlen($_SESSION['clientmsaid']==0)) {
 							<div class="dataTables_filter" id="data-table_filter"><label>Search: <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for ID"></label></div>
 							-->	
 								<table id="data-table" class="table"   border="1"> <thead> <tr id="column"> <th>#</th> 
-									<th>Client ID</th>
+									<th>Service ID</th>
 									 <th>Company Name</th>
 									 <th>Submitted Date</th>
 									 <th>Requested Date</th>
-                                     <th>Service Request</th>
+									 <th>Guard per hour</th>
+									 <th>Guard per day</th>
+									 <th>Guard per month</th>
                                      <th>Remark</th>
 									 <th>Status</th>
 									 <th>Setting</th>
@@ -74,7 +77,7 @@ if (strlen($_SESSION['clientmsaid']==0)) {
 									   </thead>
 									    <tbody>
 									    	<?php
-$sql="SELECT * from tblclient";
+$sql="SELECT * from tblservices s,tblservicedetail d where s.ServiceID = d.ServiceID";
 $query = $dbh -> prepare($sql);
 $query->execute();
 $results=$query->fetchAll(PDO::FETCH_OBJ);
@@ -86,15 +89,16 @@ foreach($results as $row)
 {               ?>
 									     <tr class="active">
 									      <th scope="row"><?php echo htmlentities($cnt);?></th>
-									       <td><?php  echo htmlentities($row->client_id);?></td>
-									        <td><?php  echo htmlentities($row->ContactName);?></td>
-                                            <td><?php  echo htmlentities($row->CreationDate);?></td>
-									         <td><?php  echo htmlentities($row->CompanyName);?></td> 
-									         <td><?php  echo htmlentities($row->Workphnumber);?></td>
-									         <td><?php  echo htmlentities($row->State);?></td>
-                                             <!-- <td><  echo htmlentities($row->Remark);?></td> -->
-											 <td><?php  echo htmlentities($row->Status);?></td>
-									        <td> <a href="service-assign-guard.php?addid=<?php echo $row->client_id;?>">Assign Services</a></td>
+									       <td><?php  echo htmlentities($row->ServiceID);?></td>
+									        <td><?php  echo htmlentities($row->CompanyName);?></td>
+                                            <td><?php  echo htmlentities($row->CreateDate);?></td>
+									         <td><?php  echo htmlentities($row->RequestDate);?></td>
+											 <td><?php  echo htmlentities($row->Guard_Hour);?></td> 
+											 <td><?php  echo htmlentities($row->Guard_Day);?></td>
+											 <td><?php  echo htmlentities($row->Guard_Month);?></td>
+									         <td><?php  echo htmlentities($row->Remark);?></td>
+									         <td><?php  echo htmlentities($row->Status);?></td>
+									        <td> <a href="service-assign-guard.php?assignid=<?php echo $row->ServiceID;?>&&<?php echo $row->Status;?>">Assign Services</a></td>
 									     </tr>
 									     <?php $cnt=$cnt+1;}} ?>
 									     </tbody> </table> 
@@ -103,6 +107,7 @@ foreach($results as $row)
 						</div>
 				
 					</div>
+					
 					<!--//graph-visual-->
 				</div>
 				<!--//outer-wp-->
@@ -110,6 +115,7 @@ foreach($results as $row)
 			</div>
 		</div>
 		<!--//content-inner-->
+	
 		<!--/sidebar-menu-->
 		<?php include_once('includes/sidebar.php');?>
 		

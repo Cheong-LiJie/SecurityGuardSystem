@@ -4,11 +4,13 @@ include('includes/dbconnection.php');
 if (strlen($_SESSION['clientmsaid']==0)) {
   header('location:logout.php');
   } else{
+	  
   	?>
 
 <!DOCTYPE HTML>
 <html>
 <head>
+
 	<title>Security Guard Management System|| Manage Guard </title>
 	
 	<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
@@ -93,7 +95,7 @@ foreach($results as $row)
 									     <tr class="active">
 									      <th scope="row"><?php echo htmlentities($cnt);?></th>
 									       <td><?php  echo htmlentities($row->AccountID);?></td>
-                                           <td><img style="height:60px;width:60px" src="http://localhost/SecurityGuardSystem/admin/images/<?php echo htmlentities($row->Picture);?>"></td>
+                                           <td><img style="height:60px;width:60px" src="http://localhost/SecurityGuardSystem/admin/images/<?php echo ($row->Picture);?>"></td>
 									         <td><?php  echo htmlentities($row->Name);?></td> 
 									         <td><?php  echo htmlentities($row->Phone);?></td>
                                              <td><?php  echo htmlentities($row->Position);?></td>

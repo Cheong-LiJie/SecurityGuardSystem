@@ -22,7 +22,9 @@ $name=$_POST['name'];
  $ppcopy=$_POST['ppcopy'];
  $permitdate=$_POST['permitdate'];
  $other=$_POST['other'];
+
  
+		
 $sql="update tblaccount set Name=:name,Phone=:phone,WorkingPermitDueDate=:permitdate,Race=:race,Nationality=:nationality,Age=:age,Position=:position,PassportNo=:ppno,Visa_Status=:visastatus,Status=:status,Picture=:picture,Medical_CheckUp=:medical,Passport_Copy=:ppcopy ,other=:other where AccountID=:eid";
 $query=$dbh->prepare($sql);
 $query->bindParam(':name',$name,PDO::PARAM_STR);
@@ -44,6 +46,7 @@ $query->execute();
 echo '<script>alert("Account detail has been updated")</script>';
 echo "<script type='text/javascript'> document.location ='account-list.php'; </script>";
   }
+
   ?>
 <!DOCTYPE HTML>
 <html>
