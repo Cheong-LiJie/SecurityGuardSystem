@@ -42,7 +42,7 @@ foreach($results as $row)
             </li>
             <li><a href="account-list.php"><i class="fa fa-table"></i> <span>Account</span></a></li>
 
-            <li><a href="#"><i class="fa fa-user"></i> <span>Service Assignation</span></a></li>
+            <li><a href="service-assign.php"><i class="fa fa-user"></i> <span>Service Assignation</span></a></li>
             <li><a href="manage-client.php"><i class="fa fa-table"></i> <span>Clients List</span></a></li>
             <li><a href="invoices.php"><i class="fa fa-file-text-o"></i> <span>Invoices</span></a></li>
 

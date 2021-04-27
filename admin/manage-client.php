@@ -1,6 +1,5 @@
 <?php
 session_start();
-error_reporting(0);
 include('includes/dbconnection.php');
 if (strlen($_SESSION['clientmsaid']==0)) {
   header('location:logout.php');
@@ -26,9 +25,9 @@ if (strlen($_SESSION['clientmsaid']==0)) {
 	<!-- /js -->
 	<script src="js/jquery-1.10.2.min.js"></script>
 	<!-- //js-->
-	
 </head> 
 <body>
+
 	<div class="page-container">
 		<!--/content-inner-->
 		<div class="left-content">
@@ -48,18 +47,27 @@ if (strlen($_SESSION['clientmsaid']==0)) {
 					</div>
 					<!--//sub-heard-part-->
 					<div class="graph-visual tables-main">
-						
 					
+		
 						<h3 class="inner-tittle two">Manage Clients <a name="add" id="add" class="btn btn-primary" href="add-client.php" role="button">Add client</a></h3>
 
 						<div class="graph">
-							<div class="tables">
-								<table class="table" border="1"> <thead> <tr> <th>#</th> 
-									<th>Account ID</th>
-									 <th>Account Type</th> 
+							<div class="tables" >
+							<!--<label>Show <select size="1" name="data-table_length" aria-controls="data-table">
+							<option value="10" selected="selected">10</option>
+							<option value="25">25</option><option value="50">50</option>
+							<option value="100">100</option>
+							</select> entries</label></div>
+
+							<div class="dataTables_filter" id="data-table_filter"><label>Search: <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for ID"></label></div>
+							-->	
+								<table id="data-table" class="table"   border="1"> <thead> <tr id="column"> <th>#</th> 
+									<th>Client ID</th>
 									 <th>Contact Name</th>
 									 <th>Company Name</th>
 									 <th>Mobile Number</th>
+									 <th>State</th>
+									 <th>Status</th>
 									 <th>Setting</th>
 									  </tr>
 									   </thead>
@@ -77,12 +85,13 @@ foreach($results as $row)
 {               ?>
 									     <tr class="active">
 									      <th scope="row"><?php echo htmlentities($cnt);?></th>
-									       <td><?php  echo htmlentities($row->AccountID);?></td>
-									        <td><?php  echo htmlentities($row->AccountType);?></td>
-									         <td><?php  echo htmlentities($row->ContactName);?></td> 
-									         <td><?php  echo htmlentities($row->CompanyName);?></td>
+									       <td><?php  echo htmlentities($row->client_id);?></td>
+									        <td><?php  echo htmlentities($row->ContactName);?></td>
+									         <td><?php  echo htmlentities($row->CompanyName);?></td> 
 									         <td><?php  echo htmlentities($row->Workphnumber);?></td>
-									        <td><a href="edit-client-details.php?editid=<?php echo $row->ID;?>">Edit</a>  ||  <a href="add-client-services.php?addid=<?php echo $row->ID;?>">Assign Services</a></td>
+									         <td><?php  echo htmlentities($row->State);?></td>
+											 <td><?php  echo htmlentities($row->Status);?></td>
+									        <td><a href="edit-client-details.php?editid=<?php echo $row->client_id;?>">Edit</a>  ||  <a href="add-client-services.php?addid=<?php echo $row->client_id;?>">Assign Services</a></td>
 									     </tr>
 									     <?php $cnt=$cnt+1;}} ?>
 									     </tbody> </table> 
@@ -100,33 +109,39 @@ foreach($results as $row)
 		<!--//content-inner-->
 		<!--/sidebar-menu-->
 		<?php include_once('includes/sidebar.php');?>
-		<div class="clearfix"></div>		
+		
 	</div>
-	<script>
-		var toggle = true;
-
-		$(".sidebar-icon").click(function() {                
-			if (toggle)
-			{
-				$(".page-container").addClass("sidebar-collapsed").removeClass("sidebar-collapsed-back");
-				$("#menu span").css({"position":"absolute"});
-			}
-			else
-			{
-				$(".page-container").removeClass("sidebar-collapsed").addClass("sidebar-collapsed-back");
-				setTimeout(function() {
-					$("#menu span").css({"position":"relative"});
-				}, 400);
-			}
-
-			toggle = !toggle;
-		});
-	</script>
-	<!--js -->
+<!--js -->
+<?php include('../includes/js.php');?>  
 	<script src="js/jquery.nicescroll.js"></script>
 	<script src="js/scripts.js"></script>
 	<!-- Bootstrap Core JavaScript -->
 	<script src="js/bootstrap.min.js"></script>
+
+
+	<script>
+function myFunction() {
+  // Declare variables
+  var input, filter, table, tr, td, i, txtValue;
+  input = document.getElementById("myInput");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("data-table");
+  tr = table.getElementsByTagName("tr");
+
+  // Loop through all table rows, and hide those who don't match the search query
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[0];
+    if (td) {
+      txtValue = td.textContent || td.innerText;
+      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }
+  }
+}
+</script>
 </body>
 </html>
 <?php }  ?>

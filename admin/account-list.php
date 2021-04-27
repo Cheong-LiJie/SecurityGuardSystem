@@ -1,6 +1,5 @@
 <?php
 session_start();
-error_reporting(0);
 include('includes/dbconnection.php');
 if (strlen($_SESSION['clientmsaid']==0)) {
   header('location:logout.php');
@@ -55,40 +54,53 @@ if (strlen($_SESSION['clientmsaid']==0)) {
 
 						<div class="graph">
 							<div class="tables">
-								<table class="table" border="1"> <thead> <tr> <th>#</th> 
+							<div id="data-table_length" class="dataTables_length">
+							<!--<label>Show <select size="1" name="data-table_length" aria-controls="data-table">
+							<option value="10" selected="selected">10</option>
+							<option value="25">25</option><option value="50">50</option>
+							<option value="100">100</option>
+							</select> entries</label></div>
+
+							<div class="dataTables_filter" id="data-table_filter"><label>Search: <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for ID"></label></div>
+							-->	<table id="data-table"class="table" border="1"> <thead> <tr> <th>#</th> 
 									<th>Account ID</th>
                                     <th>Picture</th>
 									 <th>Name</th> 
 									 <th>Phone</th>
-									 <th>Race</th>
+									 <th>Position</th>
 									 <th>Nationality</th>
 									 <th>Working Permit Due Date</th>
+									 <th>Status</th>
 									  <th>Action</th>
                                       </tr>
 									   </thead>
 									    <tbody>
-									    	<?php
+
+<?php
 $sql="SELECT * from tblaccount";
 $query = $dbh -> prepare($sql);
 $query->execute();
 $results=$query->fetchAll(PDO::FETCH_OBJ);
-
 $cnt=1;
 if($query->rowCount() > 0)
 {
 foreach($results as $row)
-{               ?>
+{               
+?>
+
+
+
 									     <tr class="active">
 									      <th scope="row"><?php echo htmlentities($cnt);?></th>
 									       <td><?php  echo htmlentities($row->AccountID);?></td>
                                            <td><img style="height:60px;width:60px" src="http://localhost/SecurityGuardSystem/admin/images/<?php echo htmlentities($row->Picture);?>"></td>
 									         <td><?php  echo htmlentities($row->Name);?></td> 
 									         <td><?php  echo htmlentities($row->Phone);?></td>
-                                             <td><?php  echo htmlentities($row->Race);?></td>
+                                             <td><?php  echo htmlentities($row->Position);?></td>
 									         <td><?php  echo htmlentities($row->Nationality);?></td>
                                              <td><?php  echo htmlentities($row->WorkingPermitDueDate);?></td>
-
-									        <td><a href="edit-client-details.php?editid=<?php echo $row->ID;?>">Edit</a></td>
+											 <td><?php  echo htmlentities($row->Status);?></td>
+									        <td><a href="account-update.php?editid=<?php echo $row->AccountID;?>">Edit</a></td>
 									     </tr>
 									     <?php $cnt=$cnt+1;}} ?>
 									     </tbody> </table> 
@@ -99,6 +111,7 @@ foreach($results as $row)
 					</div>
 					<!--//graph-visual-->
 				</div>
+				
 				<!--//outer-wp-->
 				<?php include_once('includes/footer.php');?>
 			</div>
@@ -106,7 +119,7 @@ foreach($results as $row)
 		<!--//content-inner-->
 		<!--/sidebar-menu-->
 		<?php include_once('includes/sidebar.php');?>
-		<div class="clearfix"></div>		
+	
 	</div>
 	<script>
 		var toggle = true;
@@ -129,10 +142,36 @@ foreach($results as $row)
 		});
 	</script>
 	<!--js -->
+	<?php include('../includes/js.php');?>  
 	<script src="js/jquery.nicescroll.js"></script>
 	<script src="js/scripts.js"></script>
 	<!-- Bootstrap Core JavaScript -->
 	<script src="js/bootstrap.min.js"></script>
+
+
+	<script>
+function myFunction() {
+  // Declare variables
+  var input, filter, table, tr, td, i, txtValue;
+  input = document.getElementById("myInput");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("data-tables");
+  tr = table.getElementsByTagName("tr");
+
+  // Loop through all table rows, and hide those who don't match the search query
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[0];
+    if (td) {
+      txtValue = td.textContent || td.innerText;
+      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }
+  }
+}
+</script>
 </body>
 </html>
-<?php }  ?>
+<?php }?>
