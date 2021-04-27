@@ -66,7 +66,7 @@ return true;
 	<div class="error_page">
 
 		<div class="error-top">
-			<h2 class="inner-tittle page">CMS Guard</h2>
+			<h2 class="inner-tittle page">CMS Client</h2>
 			<div class="login">
 				
 				<div class="buttons login">

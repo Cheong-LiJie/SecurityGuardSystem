@@ -34,7 +34,7 @@ foreach($results as $row)
         <ul id="menu" >
             <li><a href="dashboard.php"><i class="fa fa-tachometer"></i> <span>Dashboard</span></a></li>
 
-            <li id="menu-academico" ><a href="#"><i class="fa fa-table"></i> <span> Customer Module</span></a></li>
+            <li id="menu-academico" ><a href="customer-module.php"><i class="fa fa-users"></i> <span> Customer Module</span></a></li>
             <li><a href="account-list.php"><i class="fa fa-table"></i> <span>My Account</span></a></li>
             <li><a href="logout.php"><i class="fa fa-search"></i> <span>Log Out</span></a></li>
             

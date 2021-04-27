@@ -38,7 +38,7 @@ foreach($results as $row)
             
             <li><a href="invoices.php"><i class="fa fa-file-text-o"></i> <span>Invoice Module</span></a></li>
 
-            <li><a href="customer-module.php"><i class="fa fa-users"></i> <span>Customer Module</span></a></li>
+            <li><a href="visitor-module.php"><i class="fa fa-users"></i> <span>Customer Module</span></a></li>
 
             <li><a href="feedback.php"><i class="fa fa-comment"></i> <span>Feedback</span></a></li>
             
