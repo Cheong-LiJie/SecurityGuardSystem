@@ -45,9 +45,6 @@ if (strlen($_SESSION['clientmsuid']==0)) {
 					</div>
 					<!--//sub-heard-part-->
 					<div class="graph-visual tables-main">
-						
-					
-						<h3 class="inner-tittle two">Services Control </h3>
 						<div class="graph">
 						
 							<div class="tables">
@@ -56,7 +53,7 @@ if (strlen($_SESSION['clientmsuid']==0)) {
 									<th>Photo</th>
 									<th>Name</th>
 									<th>StaffID</th>
-									<th>Started Date</th> 
+									<th>Start Date</th> 
 									<th>End Date</th>
 									<th>Contact Number</th>
 									<th>Health Checkup</th> 
@@ -72,7 +69,7 @@ if (strlen($_SESSION['clientmsuid']==0)) {
 									<?php
 									
 									
-									$sql="select tblclient.ContactName,tblclient.CompanyName,tblinvoice.BillingId,tblinvoice.PostingDate,tblclient.Cellphnumber,tblclient.AccountID, tblinvoice.EndDate, tblclient.Photo from  tblclient   
+									$sql="select tblclient.ContactName,tblclient.CompanyName,tblinvoice.BillingId,tblinvoice.PostingDate,tblclient.Cellphnumber,tblclient.client_id, tblinvoice.EndDate, tblclient.Photo from  tblclient   
 									join tblinvoice on tblclient.ID=tblinvoice.Userid  where tblinvoice.Userid";
 								$query = $dbh -> prepare($sql);
 								
@@ -88,7 +85,7 @@ if (strlen($_SESSION['clientmsuid']==0)) {
 																		  <th scope="row"><?php echo htmlentities($cnt);?></th>
 																		   <td><img src="<?php echo ($row->Photo);?>" width="100" height="100"></td>
 																		   <td><?php  echo htmlentities($row->ContactName);?></td>
-																			<td><?php  echo htmlentities($row->AccountID);?></td>
+																			<td><?php  echo htmlentities($row->client_id);?></td>
 																			 <td><?php  echo htmlentities($row->PostingDate);?></td> 
 																			 <td><?php  echo htmlentities($row->EndDate);?></td> 
 																			 <td><?php  echo htmlentities($row->Cellphnumber);?></td> 

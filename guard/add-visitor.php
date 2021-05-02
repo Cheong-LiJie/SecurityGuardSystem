@@ -86,45 +86,36 @@ echo "<script>window.location.href ='add-visitor.php'</script>";
 						</ol>
 					</div>
 					<!--//sub-heard-part-->
-		<div class="graph-visual tables-main" id="exampl">
-						
-					
-						<h3 class="inner-tittle two">Add Visitor Profile </h3>
-
-<table class="table table-bordered" width="100%" border="1"> 
-<tr>
-<th colspan="11" style="text-align:center">Add Visitor Profile</th>	
-</tr>
-							    <tr> <th>Name:</th>
-								<form method="post" action=""> 
+					<div class="forms-main">
+<div class="graph-form">
+<div class="form-body">
+<form method="post" action="">
+<div class="row"> 
+<div class="form-group col-xs-3"><label>Name: </label> <input type="text" name="visitorName" class="form-control" placeholder="Enter Name" required /></div>
+<div class="form-group col-xs-3"> <label>IC: </label> <input type="text" name="visitorIC" class="form-control" placeholder="Enter IC" required /></div>
+<div class="form-group col-xs-3"> <label>Phone Number:</label><input type="text" name="visitorPhone" class="form-control" placeholder="Enter Phone Number" required /></div>
+</div>
+<br>
+<div class="row"> 
+<div class="form-group col-xs-3"><label>Date Visited: </label> <input type="text" name="visitorDate" class="form-control" placeholder="Enter Visit Date" required /></div>
+<div class="form-group col-xs-3"><label>Visit Location: </label><input type="text" name="visitLocation" class="form-control" placeholder="Enter Visit Location" required /></div>
+<div class="form-group col-xs-3"><label>Walk-In: </label><input type="text" name="walkinTime" class="form-control" placeholder="Enter Walk-In Time" required /></div>
+</div>
+<br>
+<div class="row"> 
+<div class="form-group col-xs-3"><label>Walk-Out: </label><input type="text" name="walkoutTime" class="form-control" placeholder="Enter Walk-Out Time"/></div>
+<div class="form-group col-xs-3"><label>Total Time: </label><input type="text" name="totalTime" class="form-control" placeholder="Enter Total Visit Time"/></div> 
+<div class="form-group col-xs-3"><label>Visit Method: </label><input type="text" name="visitMethod" class="form-control" placeholder ="Enter Visit Method" required /></div>
+</div>
+<br>
+<div class="row"> 
+<div class="form-group col-xs-3"><label>Status: </label><input type="text" name="visitStatus" class="form-control"placeholder="Enter Status" required /></div>
+</div>                               
+<button type="button" class="btn btn-default" value="Go back!" onclick="history.back()">Back</button>
+<button type="submit" input name="submit" class="btn btn-default">Add</button>
 								
-							    <td><input type="text" name="visitorName" placeholder="Enter Name" required /></td></tr>
-								<tr> <th>IC:</th> 
-								<td><input type="text" name="visitorIC" placeholder="Enter IC" required /></td> </tr>
-								<tr> <th>Phone Num:</th> 
-								<td><input type="text" name="visitorPhone" placeholder="Enter Phone Number" required /></td> </tr>
-								<tr> <th>Date Visited:</th>
-							    <td><input type="text" name="visitorDate" placeholder="Enter Visit Date" required /></td></tr>
-								<tr> <th>Visit Location:</th>
-							    <td><input type="text" name="visitLocation" placeholder="Enter Visit Location" required /></td></tr>
-								<tr> <th>Walk-In:</th> 
-								<td><input type="text" name="walkinTime" placeholder="Enter Walk-In Time" required /></td> </tr>
-								<tr> <th>Walk-Out:</th> 
-								<td><input type="text" name="walkoutTime" placeholder="Enter Walk-Out Time"/></td> </tr>
-                                <tr> <th>Total Time:</th>
-							    <td><input type="text" name="totalTime" placeholder="Enter Total Visit Time"/></td></tr>
-								<tr> <th>Visit Method:</th> 
-								<td><input type="text" name="visitMethod" placeholder ="Enter Visit Method" required /></td> </tr>
-								<tr> <th>Remarks:</th> 
-								<td><input type="text" name="visitRemark" placeholder="Enter Remarks" required /></td> </tr>
-                                <tr> <th>Status:</th>
-							    <td><input type="text" name="visitStatus" placeholder="Enter Status" required /></td></tr>
-                                <tr> <th></th> 
-                                <td><input name="submit" type="submit" value="Add"/></td></tr>
+
 								</form>
-								</table>
-
-
 
 							</div>
 

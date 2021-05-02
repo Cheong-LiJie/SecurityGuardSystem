@@ -45,23 +45,10 @@ if (strlen($_SESSION['clientmsuid']==0)) {
 					</div>
 					<!--//sub-heard-part-->
 					<div class="graph-visual tables-main">
-						
-					
-						<h3 class="inner-tittle two">Visitor Module</h3>
 						<div class="graph">
 							<div class="tables">
 								<table class="table" border="1"> <thead> 
-                                <tr>
-                                    <th colspan="12" style="text-align:center">Visitor List</th>
-                                    </tr>
-                                <tr> 
-                                    <th colspan="2">Search by date: </th>
-                                    <th colspan="3"> </th>
-									<th colspan="3">Search by status: </th>
-                                    <th colspan="1">All</th>
-									<th colspan="2">Search by name: </th>
-									<th colspan="1">All</th>
-                                    </tr>
+    
                                 <tr> 
                                     <th>No.</th> 
 									<th>Name</th>
@@ -99,7 +86,7 @@ foreach($results as $row)
 									       <td><?php  echo htmlentities($row->walkinTime);?></td>
 									       <td><?php  echo htmlentities($row->walkoutTime);?></td>
 										   <td><?php  echo htmlentities($row->totalTime);?></td>
-									       <td><?php  echo htmlentities($row->visitorLocation);?></td>
+									       <td><?php  echo htmlentities($row->visitLocation);?></td>
 									       <td><?php  echo htmlentities($row->visitMethod);?></td>
 										   <td><?php  echo htmlentities($row->visitRemark);?></td>
 									       <td><?php  echo htmlentities($row->visitStatus);?></td>

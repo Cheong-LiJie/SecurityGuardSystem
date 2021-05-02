@@ -10,10 +10,11 @@ body {
     font-family: 'Roboto', sans-serif;
     font-size: 100%;
     overflow-x: hidden;
-    background: #FFFFFF;
+    background: #2B3856;
 }
 
 body a {
+
     transition: 0.5s all;
     -webkit-transition: 0.5s all;
     -moz-transition: 0.5s all;

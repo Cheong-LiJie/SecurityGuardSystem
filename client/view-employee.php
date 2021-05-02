@@ -6,6 +6,22 @@ if (strlen($_SESSION['clientmsuid']==0)) {
   header('location:logout.php');
   } else{
   	?>
+	  <?php
+	  $invid=intval($_GET['invoiceid']);
+	  $sql="select distinct tblclient.ContactName,tblclient.CompanyName,tblclient.Workphnumber,tblclient.Email,tblclient.client_id,tblinvoice.BillingId,tblinvoice.PostingDate, tblclient.Country, tblclient.Address,tblclient.Photo, tblclient.PassportNo from  tblclient   
+		  join tblinvoice on tblclient.ID=tblinvoice.Userid  where tblinvoice.BillingId=:invid";
+	  $query = $dbh -> prepare($sql);
+	  $query->bindParam(':invid',$invid,PDO::PARAM_STR);
+	  $query->execute();
+	  
+	  $results=$query->fetchAll(PDO::FETCH_OBJ);
+	  
+	  $cnt=1;
+	  if($query->rowCount() > 0)
+	  {
+	  foreach($results as $row)
+	  {               ?>
+	  <?php $cnt=$cnt+1;}} ?>
 
 <!DOCTYPE HTML>
 <html>
@@ -45,62 +61,34 @@ if (strlen($_SESSION['clientmsuid']==0)) {
 					</div>
 					<!--//sub-heard-part-->
 		<div class="graph-visual tables-main" id="exampl">
-						
-					
-						<h3 class="inner-tittle two">Employee Details </h3>
-<?php
-$invid=intval($_GET['invoiceid']);
-$sql="select distinct tblclient.ContactName,tblclient.CompanyName,tblclient.Workphnumber,tblclient.Email,tblclient.AccountID,tblinvoice.BillingId,tblinvoice.PostingDate, tblclient.Country, tblclient.Address,tblclient.Photo, tblclient.PassportNo from  tblclient   
-	join tblinvoice on tblclient.ID=tblinvoice.Userid  where tblinvoice.BillingId=:invid";
-$query = $dbh -> prepare($sql);
-$query->bindParam(':invid',$invid,PDO::PARAM_STR);
-$query->execute();
-
-$results=$query->fetchAll(PDO::FETCH_OBJ);
-
-$cnt=1;
-if($query->rowCount() > 0)
-{
-foreach($results as $row)
-{               ?>
 						<div class="graph">
 							<div class="tables">
 								
 													<table class="table table-bordered" width="100%" border="1"> 
-<tr>
-<th colspan="8">Employee Details</th>	
-</tr>
+
 							 <tr> 
 							 <th>Photo</th>
 							 <td><img src="<?php echo ($row->Photo);?>" width="100" height="100"></td>
 								<tr> <th>Full Name</th> 
-								<td><?php  echo htmlentities($row->ContactName);?></td> </tr>
+								<td><?php  echo ($row->ContactName);?></td> </tr>
 								<tr> <th>IC/Passport No.</th> 
-								<td><?php  echo htmlentities($row->PassportNo);?></td> </tr>
+								<td><?php  echo ($row->PassportNo);?></td> </tr>
 								<tr><th>Contact no.</th>  
-								<td><?php  echo htmlentities($row->Workphnumber);?></td></tr>
+								<td><?php  echo ($row->Workphnumber);?></td></tr>
 								<tr><th>Email </th> 
-								<td><?php  echo htmlentities($row->Email);?></td></tr>
+								<td><?php  echo ($row->Email);?></td></tr>
 							</tr> 
 							 <tr> 
-								<th>Account ID</th> 
-								<td><?php echo htmlentities($row->AccountID);?></td> </tr>
+								<th>Staff ID</th> 
+								<td><?php echo ($row->client_id);?></td> </tr>
 								<tr><th>Country</th> 
-								<td colspan="6"><?php echo  htmlentities($row->Country);?></td> </tr>
+								<td colspan="6"><?php echo ($row->Country);?></td> </tr>
 								<tr><th>Address</th> 
-								<td colspan="6"><?php echo  htmlentities($row->Address);?></td> </tr>
+								<td colspan="6"><?php echo  ($row->Address);?></td> </tr>
 							</tr> 
-							<tr>
-<th style="text-align:center"><a href="service-control.php">Back</a></th>
-
-
 </tr>
-<?php $cnt=$cnt+1;}} ?>
 </table>
-
-
-
-
+	<br><button type="button" class="btn btn-default" value="Go back!" onclick="history.back()">Back</button>
 							</div>
 
 						</div>
