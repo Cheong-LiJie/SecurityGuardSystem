@@ -44,53 +44,50 @@ if (strlen($_SESSION['clientmsaid']==0)) {
 						</ol>
 					</div>
 					<!--//sub-heard-part-->
-<div class="graph-visual tables-main">			
-	<div class="graph">
-	<div class="tables">
-		<table class="table" border="1"> <thead> 
-		<tr> 
-			<th>#</th> 
-			<th>Invoice Id</th>
-			<th>Company Name</th>
-			<th>Contact Name</th> 
-			<th>Invoice Date</th>
-			<th>Action</th>
-		</tr>
-		</thead>
-
-<tbody>
-
+					<div class="graph-visual tables-main">
+						<div class="graph">
+							<div class="tables">
+								<table class="table" border="1"> <thead> <tr> <th>#</th> 
+									<th>Service ID</th>
+									<th>Company Name</th>
+									 <th>Create Date</th> 
+									 <th>Address</th>
+                                     <th>City</th>
+									 <th>Action</th>
+									  </tr>
+									   </thead>
+									    <tbody>
+									    	
 <?php
-$sql="select * from  tblclient ";
-$query = $dbh -> prepare($sql);
-$query->execute();
-$results=$query->fetchAll(PDO::FETCH_OBJ);
-
-$cnt=1;
-if($query->rowCount() > 0){
-foreach($results as $row){               ?>
-									     <tr class="active">
-									      <th scope="row"><?php echo htmlentities($cnt);?></th>
-									       <td><?php  echo htmlentities($row->BillingId);?></td>
-									       <td><?php  echo htmlentities($row->CompanyName);?></td>
-									        <td><?php  echo htmlentities($row->ContactName);?></td>
-									         <td><?php  echo htmlentities($row->PostingDate);?></td> 
-									         
-									        <td><a href="view-invoice.php?invoiceid=<?php  echo $row->BillingId;?>">View</a></td>
-									     </tr>
-									     <?php $cnt=$cnt+1;}} ?>
-									     </tbody> </table> 
-							</div>
-
-						</div>
-				
-					</div>
-					<!--//graph-visual-->
+ $sql="select * from tblservices ";
+ $query = $dbh -> prepare($sql);
+ $query->execute();
+ $results=$query->fetchAll(PDO::FETCH_OBJ);
+ $cnt=1;
+ if($query->rowCount() > 0){
+ foreach($results as $row){               
+?>
+						<tr class="active">
+							<th scope="row"><?php echo htmlentities($cnt);?></th>
+							<td><?php  echo htmlentities($row->ServiceID);?></td>
+							<td><?php  echo htmlentities($row->CompanyName);?></td>
+							<td><?php  echo htmlentities($row->CreateDate);?></td>
+                            <td><?php  echo htmlentities($row->Address);?></td>
+							<td><?php  echo htmlentities($row->City);?></td>       
+							<td><a target="_blank" href="invoice-send.php?serviceid=<?php  echo $row->ServiceID;?>">Add</a></td>
+						</tr>
+		                <?php $cnt=$cnt+1;}} ?>
+			            </tbody> 
+                    </table> 
 				</div>
-				<!--//outer-wp-->
-				<?php include_once('includes/footer.php');?>
 			</div>
 		</div>
+					<!--//graph-visual-->
+	</div>
+				<!--//outer-wp-->
+				<?php include_once('includes/footer.php');?>
+	</div>
+	</div>
 		<!--//content-inner-->
 		<!--/sidebar-menu-->
 		<?php include_once('includes/sidebar.php');?>

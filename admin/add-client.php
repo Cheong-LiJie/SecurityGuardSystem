@@ -1,5 +1,4 @@
 <?php
-session_start();
 include('includes/dbconnection.php');
 if (strlen($_SESSION['clientmsaid']==0)) {
   header('location:logout.php');
@@ -19,7 +18,6 @@ if (strlen($_SESSION['clientmsaid']==0)) {
  $email=$_POST['email'];
  $status=$_POST['status'];
 
- 
 $sql="insert into tblclient(ContactName,CompanyName,Password,Address,City,State,Postcode,Workphnumber,Cellphnumber,Email,Status)values(:cname,:comname,:password,:address,:city,:state,:postcode,:wphnumber,:cellphnumber,:email,:status)";
 $query=$dbh->prepare($sql);
 $query->bindParam(':cname',$cname,PDO::PARAM_STR);
@@ -52,7 +50,7 @@ echo "<script>document.location='manage-client.php'</script>";
 	<!-- Graph CSS -->
 	<link href="css/font-awesome.css" rel="stylesheet"> 
 	<!-- jQuery -->
-	<link href='//fonts.googleapis.com/css?family=Roboto:700,500,300,100italic,100,400' rel='stylesheet' type='text/css'>
+	<link href="css/google-font.css" rel='stylesheet' type='text/css'>
 	<!-- lined-icons -->
 	<link rel="stylesheet" href="css/icon-font.min.css" type='text/css' />
 	<!-- //lined-icons -->
@@ -64,7 +62,7 @@ echo "<script>document.location='manage-client.php'</script>";
 	<script src="js/skycons.js"></script>
 	<!--//skycons-icons-->
 </head> 
-<body>
+<body style="background-image: url('http://localhost/SecurityGuardSystem/admin/images/bg.jpg');">
 <div class="page-container">
 <!--/content-inner-->
 <div class="left-content">
@@ -78,12 +76,12 @@ echo "<script>document.location='manage-client.php'</script>";
 <ol class="breadcrumb m-b-0">
 <li><a href="dashboard.php">Home</a></li>
 <li class="active">Add Clients</li>
+<div style="float: right;"><span  class = "label label-info"><i class="fa fa-calendar"></i></span> <?php echo date("F d, Y");?></div>
 </ol>
 </div>	
 					<!--/sub-heard-part-->	
 					<!--/forms-->
 <div class="forms-main">
-<h2 class="inner-tittle">Add Clients </h2>
 <div class="graph-form">
 <div class="form-body">
 <form method="post"> 
@@ -108,7 +106,8 @@ echo "<script>document.location='manage-client.php'</script>";
 <div class="form-group col-xs-3"> <label>Status</label> <input type="text" name="status"  value="Active" class="form-control" required='true' readonly> </div>
 </div> 
 <div>
-<button type="submit" class="btn btn-default" name="submit" id="submit">Save</button> </form> 
+<button type="submit" class="btn btn-default" name="submit" id="submit">Save</button> 
+<input type="button" class="btn btn-default" value="Back" onClick="history.back();return true;"></form> 
 </div>
 </div> 
 </div> 

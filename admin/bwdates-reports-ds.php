@@ -1,5 +1,4 @@
 <?php
-session_start();
 error_reporting(0);
 include('includes/dbconnection.php');
 if (strlen($_SESSION['clientmsaid']==0)) {
@@ -59,7 +58,9 @@ if (strlen($_SESSION['clientmsaid']==0)) {
 	<div class="form-group"> <label for="exampleInputEmail1">From Date</label> <input type="date" name="fromdate" id="fromdate" value="" class="form-control" required='true'> </div>
 	<div class="form-group"> <label for="exampleInputEmail1">To Date</label> <input type="date" name="todate" id="todate" value="" class="form-control" required='true'> </div>
 		
-	 <button type="submit" class="btn btn-default" name="submit" id="submit">Submit</button> </form> 
+	 <button type="submit" class="btn btn-default" name="submit" id="submit">Submit</button> 
+	 <input type="button" class="btn btn-default" value="Back" onClick="history.back();return true;">
+	 </form> 
 </div>
 </div>
 </div> 

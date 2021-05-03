@@ -1,15 +1,12 @@
 <?php
-session_start();
-//error_reporting(0);
 include('includes/dbconnection.php');
 if (strlen($_SESSION['clientmsaid']==0)) {
   header('location:logout.php');
   } else{
-    if(isset($_POST['submit']))
-  {
+    if(isset($_POST['submit'])){
  $aid=$_GET['assignid'];
- $sstatus=$_GET['sstatus'];
-echo '<script>alert("Service (has been updated")</script>';
+
+echo '<script>alert("Service has been updated")</script>';
 echo "<script>window.location.href ='service-assign.php'</script>";
 
   }
@@ -27,7 +24,7 @@ echo "<script>window.location.href ='service-assign.php'</script>";
 	<!-- Graph CSS -->
 	<link href="css/font-awesome.css" rel="stylesheet"> 
 	<!-- jQuery -->
-	<link href='//fonts.googleapis.com/css?family=Roboto:700,500,300,100italic,100,400' rel='stylesheet' type='text/css'>
+	<link href="css/google-font.css" rel='stylesheet' type='text/css'>
 	<!-- lined-icons -->
 	<link rel="stylesheet" href="css/icon-font.min.css" type='text/css' />
 	<!-- //lined-icons -->
@@ -39,7 +36,7 @@ echo "<script>window.location.href ='service-assign.php'</script>";
 	<script src="js/skycons.js"></script>
 	<!--//skycons-icons-->
 </head> 
-<body>
+<body style="background-image: url('http://localhost/SecurityGuardSystem/admin/images/bg.jpg');">
 <div class="page-container">
 <!--/content-inner-->
 <div class="left-content">
@@ -53,35 +50,62 @@ echo "<script>window.location.href ='service-assign.php'</script>";
 <ol class="breadcrumb m-b-0">
 <li><a href="dashboard.php">Home</a></li>
 <li class="active">Update Services</li>
+<div style="float: right;"><span  class = "label label-info"><i class="fa fa-calendar"></i></span> <?php echo date("F d, Y");?></div>
 </ol>
 </div>	
+
+<!--client details-->
+
 					<!--/sub-heard-part-->	
 					<!--/forms-->
-                    <h3 class="inner-tittle two"> Assign Services</h3>
-						<div class="graph">
-							<div class="tables">
+						
+							<?php
+$aid=$_GET['assignid'];
+$sql="SELECT * from  tblclient where client_id=:aid";
+$query = $dbh -> prepare($sql);
+$query->bindParam(':aid',$aid,PDO::PARAM_STR);
+$query->execute();
+$results=$query->fetchAll(PDO::FETCH_OBJ);
+$cnt=1;
+if($query->rowCount() > 0){
+foreach($results as $row){               ?>
+
+<h3>Client Details</h3>
+
+<div class="row">
+<div class="form-group col-xs-3"> <label>ID:</label> <span> <?php  echo $row->client_id;?></span> </div>
+<div class="form-group col-xs-3"> <label>Company Name:</label><span> <?php  echo $row->CompanyName;?></span></div>
+<div class="form-group col-xs-3"> <label>Phone:</label> <span><?php  echo $row->Workphnumber;?> </span></div>
+<div class="form-group col-xs-3"> <label>Email:</label> <span><?php  echo $row->Email;?> </span></div>
+</div>
+
+<div class="row">
+<div class="form-group col-xs-3"> <label>Address:</label>  <span><?php  echo $row->Address;?></span></div>
+<div class="form-group col-xs-3"> <label>City:</label> <span><?php  echo $row->City;?></span> </div>
+<div class="form-group col-xs-3"> <label>PostCode:</label><span> <?php  echo $row->Postcode;?> </span></div>
+<div class="form-group col-xs-3"> <label>State:</label> <span><?php  echo $row->State;?> </span></div>
+</div> 
+<?php $cnt=$cnt+1;}} ?>
+<div class="graph">
+<div class="tables">
 								<form method="post">
 								<table class="table" border="1"> <thead> <tr> <th>#</th> 
 									<th>Guard Name</th>
 									 <th>Position</th> 
 									 <th>Working Permit Due Date</th>
-									 
 									 <th>Assign</th>
 									  </tr>
 									   </thead>
 									    <tbody>
 <?php
-
 $sql="SELECT Name, Position, WorkingPermitDueDate  from tblaccount WHERE Status='Active'";
 $query = $dbh -> prepare($sql);
-
 $query->execute();
 $results=$query->fetchAll(PDO::FETCH_OBJ);
 $cnt=1;
-if($query->rowCount() > 0)
-{
-foreach($results as $row)
-{               ?> <tr class="active">
+if($query->rowCount() > 0){
+foreach($results as $row){               ?> 
+<tr class="active">
     <th scope="row"><?php echo htmlentities($cnt);?></th>
      <td><?php  echo htmlentities($row->Name);?></td>
       <td><?php  echo htmlentities($row->Position);?></td>
@@ -92,7 +116,8 @@ foreach($results as $row)
    <?php $cnt=$cnt+1;}} ?>
    <tr>
 <td colspan="5" align="center">
-<button type="submit" name="submit" class="btn btn-default">Assign</button>		
+<button type="submit" name="submit" class="btn btn-default">Assign</button>	
+<input type="button" class="btn btn-default" value="Back" onClick="history.back();return true;">	
 </td>
 
 </tr>
@@ -115,13 +140,11 @@ foreach($results as $row)
 		var toggle = true;
 
 		$(".sidebar-icon").click(function() {                
-			if (toggle)
-			{
+			if (toggle){
 				$(".page-container").addClass("sidebar-collapsed").removeClass("sidebar-collapsed-back");
 				$("#menu span").css({"position":"absolute"});
 			}
-			else
-			{
+			else{
 				$(".page-container").removeClass("sidebar-collapsed").addClass("sidebar-collapsed-back");
 				setTimeout(function() {
 					$("#menu span").css({"position":"relative"});

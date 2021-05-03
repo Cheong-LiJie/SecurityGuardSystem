@@ -1,5 +1,4 @@
 <?php
-session_start();
 include('includes/dbconnection.php');
 if (strlen($_SESSION['clientmsaid']==0)) {
   header('location:logout.php');
@@ -33,6 +32,7 @@ $query->bindParam(':email',$email,PDO::PARAM_STR);
 $query->bindParam(':status',$status,PDO::PARAM_STR);
 $query->bindParam(':eid',$eid,PDO::PARAM_STR);
 $query->execute();
+
 echo '<script>alert("Client details has been updated")</script>';
 echo "<script type='text/javascript'> document.location ='manage-client.php'; </script>";
   }
@@ -50,7 +50,7 @@ echo "<script type='text/javascript'> document.location ='manage-client.php'; </
 	<!-- Graph CSS -->
 	<link href="css/font-awesome.css" rel="stylesheet"> 
 	<!-- jQuery -->
-	<link href='//fonts.googleapis.com/css?family=Roboto:700,500,300,100italic,100,400' rel='stylesheet' type='text/css'>
+	<link href="css/google-font.css" rel='stylesheet' type='text/css'>
 	<!-- lined-icons -->
 	<link rel="stylesheet" href="css/icon-font.min.css" type='text/css' />
 	<!-- //lined-icons -->
@@ -65,7 +65,7 @@ echo "<script type='text/javascript'> document.location ='manage-client.php'; </
 	<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.js"></script>
 
 </head> 
-<body>
+<body style="background-image: url('http://localhost/SecurityGuardSystem/admin/images/bg.jpg');">
 
 <div class="page-container">
 <!--/content-inner-->
@@ -85,7 +85,6 @@ echo "<script type='text/javascript'> document.location ='manage-client.php'; </
 					<!--/sub-heard-part-->	
 					<!--/forms-->
 <div class="forms-main">
-<h2 class="inner-tittle">Update Clients </h2>
 <div class="graph-form">
 <div class="form-body">
 <form method="post"> 
