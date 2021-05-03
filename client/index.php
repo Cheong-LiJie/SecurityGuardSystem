@@ -53,7 +53,7 @@ echo "<script>alert('Invalid Details');</script>";
 			<div class="login">
 				
 				<div class="buttons login">
-					<h3 class="inner-tittle t-inner" style="color: lightblue">Sign In</h3>
+					<h3 class="inner-tittle t-inner" style="color: blue">Sign In</h3>
 				</div>
 				<form id="login" method="post" name="login"> 
 					<input type="text" class="text" value="Email" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'E-mail address';}" name="email" required="true">
@@ -62,8 +62,8 @@ echo "<script>alert('Invalid Details');</script>";
 					<div class="clearfix"></div>
 
 					<div class="new">
-						<p><a href="forgot-password.php">Forgot Password?</a></p>
-						<p><a href="../index.php">Back Home!!</a></p>
+						<a href="forgot-password.php">Forgot Password?</a><br></br>
+						<a href="../index.php">Back Home</a>
 						<div class="clearfix"></div>
 					</div>
 				</form>

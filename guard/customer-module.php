@@ -6,7 +6,7 @@ if (strlen($_SESSION['clientmsuid']==0)) {
   header('location:logout.php');
   } else{
   	?>
-
+		
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -40,42 +40,28 @@ if (strlen($_SESSION['clientmsuid']==0)) {
 					<div class="sub-heard-part">
 						<ol class="breadcrumb m-b-0">
 							<li><a href="dashboard.php">Home</a></li>
-							<li class="active">Customer Module</li>
+							<li class="active">Visitor Module</li>
 						</ol>
 					</div>
 					<!--//sub-heard-part-->
 					<div class="graph-visual tables-main">
-						
-					
-						<h3 class="inner-tittle two">Customer Module</h3>
 						<div class="graph">
+						<button type= "button" class="btn btn-primary"><a href="add-visitor.php">Add New Visitor</a></th></button><br></br>
 							<div class="tables">
 								<table class="table" border="1"> <thead> 
-                                <tr>
-                                    <th colspan="10">Visitor List</th>
-									<th colspan="2"><a href="add-visitor.php">Add New Visitor</a></th>
-                                    </tr>
-                                <tr> 
-                                    <th colspan="2">Search by date: </th>
-                                    <th colspan="3"> </th>
-									<th colspan="2">Search by status: </th>
-                                    <th colspan="1">All</th>
-									<th colspan="2">Search by name: </th>
-									<th colspan="2">All</th>
-                                    </tr>
                                 <tr> 
                                     <th>No.</th> 
 									<th>Name</th>
-									<th>Date Visited</th>
-									<th>Walk-In Time</th>
-									<th>Walk-out Time</th> 
-                                    <th>Total Visit Time</th>
-									<th>Visited Location</th>
-                                    <th>Visit Method</th>
+									<th>Date</th>
+									<th>Walk-In</th>
+									<th>Walk-out</th> 
+                                    <th>Total Time</th>
+									<th>Location</th>
+                                    <th>Method</th>
 									<th>Remarks</th>
                                     <th>Status</th>
-                                    <th>Edit Profile</th>
-                                    <th>View Profile</th>
+                                    <th colspan="2">Profile</th>
+                                   
 
 
 									
@@ -97,16 +83,16 @@ if($query->rowCount() > 0)
 foreach($results as $row)
 {               ?>
 									     <tr class="active">
-									      <th scope="row"><?php echo htmlentities($cnt);?></th>
-									       <td><?php  echo htmlentities($row->visitorName);?></td>
-									       <td><?php  echo htmlentities($row->visitorDate);?></td>
-									       <td><?php  echo htmlentities($row->walkinTime);?></td>
-									       <td><?php  echo htmlentities($row->walkoutTime);?></td>
-										   <td><?php  echo htmlentities($row->totalTime);?></td>
-									       <td><?php  echo htmlentities($row->visitorLocation);?></td>
-									       <td><?php  echo htmlentities($row->visitMethod);?></td>
-										   <td><?php  echo htmlentities($row->visitRemark);?></td>
-									       <td><?php  echo htmlentities($row->visitStatus);?></td>
+									      <th scope="row"><?php echo ($cnt);?></th>
+									       <td><?php  echo ($row->visitorName);?></td>
+									       <td><?php  echo ($row->visitorDate);?></td>
+									       <td><?php  echo ($row->walkinTime);?></td>
+									       <td><?php  echo ($row->walkoutTime);?></td>
+										   <td><?php  echo ($row->totalTime);?></td>
+									       <td><?php  echo ($row->visitLocation);?></td>
+									       <td><?php  echo ($row->visitMethod);?></td>
+										   <td><?php  echo($row->visitRemark);?></td>
+									       <td><?php  echo ($row->visitStatus);?></td>
 										   <td><a href="edit-visitor.php">Edit</a></td>
 									       <td><a href="view-visitor.php">View</a></td>
 									     </tr>

@@ -8,10 +8,10 @@
     <!--/down-->
     <div class="down">  
         <?php
-$aid=$_SESSION['clientmsaid'];
-$sql="SELECT AdminName from  tbladmin where ID=:aid";
+$uid=$_SESSION['clientmsuid'];
+$sql="SELECT CompanyName from  tblclient where client_id=:uid";
 $query = $dbh -> prepare($sql);
-$query->bindParam(':aid',$aid,PDO::PARAM_STR);
+$query->bindParam(':uid',$uid,PDO::PARAM_STR);
 $query->execute();
 $results=$query->fetchAll(PDO::FETCH_OBJ);
 $cnt=1;
@@ -19,8 +19,8 @@ if($query->rowCount() > 0)
 {
 foreach($results as $row)
 {               ?>
-        <a href="dashboard.php"><img src="images/images.jpg" height="70" width="70"></a>
-        <a href="dashboard.php"><span class=" name-caret"><?php  echo $row->AdminName;?></span></a>
+        <a href="dashboard.php"><img src="images/admin10.jpg" height="70" width="70"></a>
+        <a href="dashboard.php"><span class=" name-caret"><?php  echo $row->CompanyName;?></span></a>
         
         <?php $cnt=$cnt+1;}} ?>
         <ul>
@@ -34,7 +34,7 @@ foreach($results as $row)
         <ul id="menu" >
             <li><a href="dashboard.php"><i class="fa fa-tachometer"></i> <span>Dashboard</span></a></li>
 
-            <li id="menu-academico" ><a href="customer-module.php"><i class="fa fa-users"></i> <span> Customer Module</span></a></li>
+            <li id="menu-academico" ><a href="customer-module.php"><i class="fa fa-users"></i> <span> Visitor Module</span></a></li>
             <li><a href="account-list.php"><i class="fa fa-table"></i> <span>My Account</span></a></li>
             <li><a href="logout.php"><i class="fa fa-search"></i> <span>Log Out</span></a></li>
             
