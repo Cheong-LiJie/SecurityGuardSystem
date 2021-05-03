@@ -25,7 +25,7 @@ if (strlen($_SESSION['clientmsaid']==0)) {
 	<script src="js/jquery-1.10.2.min.js"></script>
 	<!-- //js-->
 </head> 
-<body>
+<body style="background-image: url('http://localhost/SecurityGuardSystem/admin/images/bg.jpg');">
 	<div class="page-container">
 		<!--/content-inner-->
 		<div class="left-content">
@@ -39,8 +39,8 @@ if (strlen($_SESSION['clientmsaid']==0)) {
 					<div class="sub-heard-part">
 						<ol class="breadcrumb m-b-0">
 							<li><a href="dashboard.php">Home</a></li>
-							<li class="active">Invoice</li>
-							<div style="float: right;"><span  class = "label label-info"><i class="fa fa-calendar"></i></span> <?php echo date("F d, Y");?></div>
+							<li class="active"style="color:white;">Invoice</li>
+							<div class="datebar" style="float: right;color:white;"><span  class = "label label-info"><i class="fa fa-calendar"></i></span> <?php echo date("F d, Y");?></div>
 						</ol>
 					</div>
 					<!--//sub-heard-part-->

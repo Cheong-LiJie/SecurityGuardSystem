@@ -70,7 +70,7 @@ if (strlen($_SESSION['clientmsuid']==0)) {
 	<!-- Graph CSS -->
 	<link href="css/font-awesome.css" rel="stylesheet"> 
 	<!-- jQuery -->
-	<link href='//fonts.googleapis.com/css?family=Roboto:700,500,300,100italic,100,400' rel='stylesheet' type='text/css'>
+	<link href="css/google-font.css" rel='stylesheet' type='text/css'>
 	<!-- lined-icons -->
 	<link rel="stylesheet" href="css/icon-font.min.css" type='text/css' />
 	<!-- /js -->
@@ -91,7 +91,8 @@ if (strlen($_SESSION['clientmsuid']==0)) {
 					<div class="sub-heard-part">
 						<ol class="breadcrumb m-b-0">
 							<li><a href="dashboard.php">Home</a></li>
-							<li class="active">Services Request</li>
+							<li class="active"style="color:white;">Services Request</li>
+							<div class="datebar" style="float: right;color:white;"><span  class = "label label-info"><i class="fa fa-calendar"></i></span> <?php echo date("F d, Y");?></div>
 						</ol>
 					</div>
 					<!--//sub-heard-part-->
@@ -110,7 +111,6 @@ if($query->rowCount() > 0)
 foreach($results as $row)
 {               ?>
 <div class="forms-main">
-<h2 class="inner-tittle">Services Request </h2>
 <div class="graph-form">
 <div class="form-body">
 <form method="post"> 
@@ -119,14 +119,11 @@ foreach($results as $row)
 
 
 
-<input aria-hidden="true" type="hidden" name="id" value="<?php  echo $row->client_id;?>" class="form-control" readonly> 
-<input hidden type="hidden" name="comname" value="<?php  echo $row->CompanyName;?>" class="form-control" required='true' readonly>
- <input type="hidden" name="cname" value="<?php  echo $row->ContactName;?>" class="form-control" required='true' readonly> 
+<input type="hidden" name="id" value="<?php  echo $row->client_id;?>" class="form-control" readonly> 
+<input type="hidden" name="comname" value="<?php  echo $row->CompanyName;?>" class="form-control" required='true' readonly>
+<input type="hidden" name="cname" value="<?php  echo $row->ContactName;?>" class="form-control" required='true' readonly> 
 <input type="hidden" name="phone"  value="<?php  echo $row->Workphnumber;?>" class="form-control" required='true' readonly> 
 <input type="hidden" name="email"  value="<?php  echo $row->Email;?>" class="form-control" required='true' readonly>
-
-
-
 <input type="hidden" name="address"  value="<?php  echo $row->Address;?>" class="form-control" required='true' readonly> 
 <input type="hidden" name="city"  value="<?php  echo $row->City;?>" class="form-control" required='true' readonly>
 <input type="hidden" name="postcode"  value="<?php  echo $row->Postcode;?>" class="form-control" required='true' readonly> 

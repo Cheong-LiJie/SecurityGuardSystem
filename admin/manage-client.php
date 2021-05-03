@@ -7,7 +7,6 @@ if (strlen($_SESSION['clientmsaid']==0)) {
 
 <!DOCTYPE HTML>
 <html>
-<div style="background-image: url('http://localhost/SecurityGuardSystem/admin/images/bg.jpg');">
 <head>
 	<title>Client Management Sysytem || Manage Client </title>
 	
@@ -42,7 +41,7 @@ if (strlen($_SESSION['clientmsaid']==0)) {
 						<ol class="breadcrumb m-b-0">
 							<li><a href="dashboard.php">Home</a></li>
 							<li class="active">Manage Clients</li>
-							<div style="float: right;"><span  class = "label label-info"><i class="fa fa-calendar"></i></span> <?php echo date("F d, Y");?></div>
+							<div class="datebar"style="float: right;color:white;"><span  class = "label label-info"><i class="fa fa-calendar"></i></span> <?php echo date("F d, Y");?></div>
 						</ol>
 					</div>
 					<!--//sub-heard-part-->

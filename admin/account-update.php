@@ -84,8 +84,8 @@ echo "<script type='text/javascript'> document.location ='account-list.php'; </s
 <div class="sub-heard-part">
 <ol class="breadcrumb m-b-0">
 <li><a href="dashboard.php">Home</a></li>
-<li class="active">Update Account</li>
-<div style="float: right;"><span  class = "label label-info"><i class="fa fa-calendar"></i></span> <?php echo date("F d, Y");?></div>
+<li class="active"style="color:white;">Update Account</li>
+<div class="datebar" style="float: right;color:white;"><span  class = "label label-info"><i class="fa fa-calendar"></i></span> <?php echo date("F d, Y");?></div>
 </ol>
 </div>	
 					<!--/sub-heard-part-->	

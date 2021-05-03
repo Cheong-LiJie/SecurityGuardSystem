@@ -102,7 +102,7 @@ foreach($results as $row){
 </div>
 </div>
     <div class="row">
-    <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">
+    <div >
         <button class="btn btn-danger delete" id="removeRows" type="button">- Delete</button>
         <button class="btn btn-success" id="addRows" type="button">+ Add More</button>
     </div>

@@ -3,8 +3,7 @@ include('includes/dbconnection.php');
 if (strlen($_SESSION['clientmsaid']==0)) {
   header('location:logout.php');
   } else{
-    if(isset($_POST['submit']))
-  {
+    if(isset($_POST['submit'])){
 $eid=$_GET['editid'];
 $clientmsaid=$_SESSION['clientmsaid'];
  $cname=$_POST['cname'];
@@ -61,8 +60,6 @@ echo "<script type='text/javascript'> document.location ='manage-client.php'; </
 	<!--skycons-icons-->
 	<script src="js/skycons.js"></script>
 	<!--//skycons-icons-->
-	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.css">
-	<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.js"></script>
 
 </head> 
 <body style="background-image: url('http://localhost/SecurityGuardSystem/admin/images/bg.jpg');">
@@ -79,7 +76,7 @@ echo "<script type='text/javascript'> document.location ='manage-client.php'; </
 <div class="sub-heard-part">
 <ol class="breadcrumb m-b-0">
 <li><a href="dashboard.php">Home</a></li>
-<li class="active">Update Clients</li>
+<li class="active"style="color:white;">Update Clients</li>
 </ol>
 </div>	
 					<!--/sub-heard-part-->	
@@ -96,10 +93,8 @@ $query->bindParam(':eid',$eid,PDO::PARAM_STR);
 $query->execute();
 $results=$query->fetchAll(PDO::FETCH_OBJ);
 $cnt=1;
-if($query->rowCount() > 0)
-{
-foreach($results as $row)
-{               ?>								
+if($query->rowCount() > 0){
+foreach($results as $row){               ?>								
 	<div class="row">
 <div class="form-group col-xs-4"> <label>Contact Name</label> <input  type="text" name="cname"  value="<?php  echo $row->ContactName;?>" class="form-control" required='true'> </div>
 <div class="form-group col-xs-4"> <label>Company Name</label> <input type="text" name="comname" value="<?php  echo $row->CompanyName;?>" class="form-control" required='true'> </div></div>

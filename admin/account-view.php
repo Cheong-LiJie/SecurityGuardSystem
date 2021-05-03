@@ -83,8 +83,8 @@ if (strlen($_SESSION['clientmsaid']==0)) {
 <div class="sub-heard-part">
 <ol class="breadcrumb m-b-0">
 <li><a href="dashboard.php">Home</a></li>
-<li class="active">Update Account</li>
-<div style="float: right;"><span  class = "label label-info"><i class="fa fa-calendar"></i></span> <?php echo date("F d, Y");?></div>
+<li class="active"style="color:white;">Update Account</li>
+<div class="datebar" style="float: right;color:white;"><span  class = "label label-info"><i class="fa fa-calendar"></i></span> <?php echo date("F d, Y");?></div>
 </ol>
 </div>	
 					<!--/sub-heard-part-->	
@@ -143,8 +143,8 @@ foreach($results as $row){               ?>
 <div class="form-group col-xs-6"> <label>Medical Check up</label><img name="images" id="image2" style="height:100px;width:100px" src="http://localhost/SecurityGuardSystem/admin/images/<?php echo ($row->Medical_CheckUp);?>"></div>
 </div>
 <div class="row">
-<div class="form-group col-xs-6"> <label>Passport copy</label><img id="image"  style="height:100px;width:100px" src="http://localhost/SecurityGuardSystem/admin/images/<?php echo ($row->Passport_Copy);?>"></div>
-<div class="form-group col-xs-6"> <label>Other</label><img id="image" style="height:100px;width:100px" src="http://localhost/SecurityGuardSystem/admin/images/<?php echo ($row->other);?>"></div>
+<div class="form-group col-xs-6"> <label>Passport copy</label><img id="image3"  style="height:100px;width:100px" src="http://localhost/SecurityGuardSystem/admin/images/<?php echo ($row->Passport_Copy);?>"></div>
+<div class="form-group col-xs-6"> <label>Other</label><img id="image4" style="height:100px;width:100px" src="http://localhost/SecurityGuardSystem/admin/images/<?php echo ($row->other);?>"></div>
 </div><?php $cnt=$cnt+1;}} ?>
 	<input type="button" class="btn btn-default" value="Back" onClick="history.back();return true;"> </form> 
 </div>
@@ -175,23 +175,29 @@ foreach($results as $row){               ?>
 // Get the modal
 var modal = document.getElementById("myModal");
 // Get the image and insert it inside the modal - use its "alt" text as a caption
-var img;
+var img= document.getElementById("image");
+var img2= document.getElementById("image2");
+var img3= document.getElementById("image3");
+var img4= document.getElementById("image4");
 var modalImg = document.getElementById("img01");
 var captionText = document.getElementById("caption");
-
-    if(img = document.getElementById("image2")){
+{
         img.onclick = function(){
   modal.style.display = "block";
   modalImg.src = this.src;
   captionText.innerHTML = this.alt;
-}}  else if (img = document.getElementById("image")){
-        img.onclick = function(){
+  }
+  img2.onclick = function(){
   modal.style.display = "block";
   modalImg.src = this.src;
   captionText.innerHTML = this.alt;
-        }}
-else{
-        img.onclick = function(){
+  }
+  img3.onclick = function(){
+  modal.style.display = "block";
+  modalImg.src = this.src;
+  captionText.innerHTML = this.alt;
+  }
+  img4.onclick = function(){
   modal.style.display = "block";
   modalImg.src = this.src;
   captionText.innerHTML = this.alt;

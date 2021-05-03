@@ -7,11 +7,27 @@ if (strlen($_SESSION['clientmsaid']==0)) {
   	?>
 <!DOCTYPE HTML>
 <html>
-
 <head>
 
 	<title>Security Guard Management System|| Manage Guard </title>
-	
+	<script>
+		var toggle = true;
+
+		$(".sidebar-icon").click(function() {                
+			if (toggle){
+				$(".page-container").addClass("sidebar-collapsed").removeClass("sidebar-collapsed-back");
+				$("#menu span").css({"position":"absolute"});
+			}
+			else{
+				$(".page-container").removeClass("sidebar-collapsed").addClass("sidebar-collapsed-back");
+				setTimeout(function() {
+					$("#menu span").css({"position":"relative"});
+				}, 400);
+			}
+
+			toggle = !toggle;
+		});
+	</script>
 	<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
 	<!-- Bootstrap Core CSS -->
 	<link href="css/bootstrap.min.css" rel='stylesheet' type='text/css' />
@@ -27,8 +43,6 @@ if (strlen($_SESSION['clientmsaid']==0)) {
 	<script src="js/jquery-1.10.2.min.js"></script>
 	<!-- //js-->
 	
- 
-<script type="text/javascript" charset="utf8" src="/DataTables/datatables.js"></script>
 </head> 
 
 <body style="background-image: url('http://localhost/SecurityGuardSystem/admin/images/bg.jpg');">
@@ -46,8 +60,8 @@ if (strlen($_SESSION['clientmsaid']==0)) {
 					<div class="sub-heard-part">
 						<ol class="breadcrumb m-b-0">
 							<li><a href="dashboard.php">Home</a></li>
-							<li class="active">Manage Guard</li>
-							<div style="float: right;"><span  class = "label label-info"><i class="fa fa-calendar"></i></span> <?php echo date("F d, Y");?></div>
+							<li class="active" style="color:white;">Manage Guard</li>
+							<div class="datebar" style="float: right;color:white; "><span  class = "label label-info"><i class="fa fa-calendar"></i></span> <?php echo date("F d, Y");?></div>
 						</ol>
 					</div>
 					<!--//sub-heard-part-->
@@ -127,24 +141,7 @@ foreach($results as $row)
 		<?php include_once('includes/sidebar.php');?>
 	
 	</div>
-	<script>
-		var toggle = true;
-
-		$(".sidebar-icon").click(function() {                
-			if (toggle){
-				$(".page-container").addClass("sidebar-collapsed").removeClass("sidebar-collapsed-back");
-				$("#menu span").css({"position":"absolute"});
-			}
-			else{
-				$(".page-container").removeClass("sidebar-collapsed").addClass("sidebar-collapsed-back");
-				setTimeout(function() {
-					$("#menu span").css({"position":"relative"});
-				}, 400);
-			}
-
-			toggle = !toggle;
-		});
-	</script>
+	
 	<!--js -->
 	<?php include('../includes/js.php');?>  
 	<script src="js/jquery.nicescroll.js"></script>
@@ -153,34 +150,6 @@ foreach($results as $row)
 	<script src="js/bootstrap.min.js"></script>
 
 
-	<script>
-function myFunction() {
-  // Declare variables
-  var input, filter, table, tr, td, i, txtValue;
-  input = document.getElementById("myInput");
-  filter = input.value.toUpperCase();
-  table = document.getElementById("data-tables");
-  tr = table.getElementsByTagName("tr");
-
-  // Loop through all table rows, and hide those who don't match the search query
-  for (i = 0; i < tr.length; i++) {
-    td = tr[i].getElementsByTagName("td")[0];
-    if (td) {
-      txtValue = td.textContent || td.innerText;
-      if (txtValue.toUpperCase().indexOf(filter) > -1) {
-        tr[i].style.display = "";
-      } else {
-        tr[i].style.display = "none";
-      }
-    }
-  }
-}
-</script>
-<style>
-div {
-  background-image: url('bg.jpg');
-}
-</style>
 </body>
 </html>
 <?php }?>

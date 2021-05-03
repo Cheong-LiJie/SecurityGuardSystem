@@ -36,7 +36,7 @@ echo "<script>window.location.href ='service-assign.php'</script>";
 	<script src="js/skycons.js"></script>
 	<!--//skycons-icons-->
 </head> 
-<body style="background-image: url('http://localhost/SecurityGuardSystem/admin/images/bg.jpg');">
+<body>
 <div class="page-container">
 <!--/content-inner-->
 <div class="left-content">
@@ -49,8 +49,8 @@ echo "<script>window.location.href ='service-assign.php'</script>";
 <div class="sub-heard-part">
 <ol class="breadcrumb m-b-0">
 <li><a href="dashboard.php">Home</a></li>
-<li class="active">Update Services</li>
-<div style="float: right;"><span  class = "label label-info"><i class="fa fa-calendar"></i></span> <?php echo date("F d, Y");?></div>
+<li class="active"">Update Services</li>
+<div class="datebar" style="float: right;"><span  class = "label label-info"><i class="fa fa-calendar"></i></span> <?php echo date("F d, Y");?></div>
 </ol>
 </div>	
 
