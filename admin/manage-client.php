@@ -1,5 +1,4 @@
 <?php
-session_start();
 include('includes/dbconnection.php');
 if (strlen($_SESSION['clientmsaid']==0)) {
   header('location:logout.php');
@@ -26,7 +25,7 @@ if (strlen($_SESSION['clientmsaid']==0)) {
 	<script src="js/jquery-1.10.2.min.js"></script>
 	<!-- //js-->
 </head> 
-<body>
+<body style="background-image: url('http://localhost/SecurityGuardSystem/admin/images/bg.jpg');">
 
 	<div class="page-container">
 		<!--/content-inner-->
@@ -42,15 +41,12 @@ if (strlen($_SESSION['clientmsaid']==0)) {
 						<ol class="breadcrumb m-b-0">
 							<li><a href="dashboard.php">Home</a></li>
 							<li class="active">Manage Clients</li>
-
+							<div class="datebar"style="float: right;color:white;"><span  class = "label label-info"><i class="fa fa-calendar"></i></span> <?php echo date("F d, Y");?></div>
 						</ol>
 					</div>
 					<!--//sub-heard-part-->
 					<div class="graph-visual tables-main">
 					
-		
-						<h3 class="inner-tittle two">Manage Clients <a name="add" id="add" class="btn btn-primary" href="add-client.php" role="button">Add client</a></h3>
-
 						<div class="graph">
 							<div class="tables" >
 							<!--<label>Show <select size="1" name="data-table_length" aria-controls="data-table">
@@ -61,7 +57,9 @@ if (strlen($_SESSION['clientmsaid']==0)) {
 
 							<div class="dataTables_filter" id="data-table_filter"><label>Search: <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for ID"></label></div>
 							-->	
-								<table id="data-table" class="table"   border="1"> <thead> <tr id="column"> <th>#</th> 
+								<table id="data-table" class="table"   border="1"> 
+								<a style="float: right;" name="add" id="add" class="btn btn-primary" href="add-client.php" role="button">Add client</a>
+								<thead> <tr id="column"> <th>#</th> 
 									<th>Client ID</th>
 									 <th>Contact Name</th>
 									 <th>Company Name</th>
@@ -110,6 +108,7 @@ foreach($results as $row)
 		<!--/sidebar-menu-->
 		<?php include_once('includes/sidebar.php');?>
 		
+	</div>
 	</div>
 <!--js -->
 <?php include('../includes/js.php');?>  

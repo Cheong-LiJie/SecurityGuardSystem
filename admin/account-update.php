@@ -1,11 +1,9 @@
 <?php
-session_start();
 include('includes/dbconnection.php');
 if (strlen($_SESSION['clientmsaid']==0)) {
   header('location:logout.php');
   } else{
-    if(isset($_POST['submit']))
-  {
+    if(isset($_POST['submit'])){
 $eid=$_GET['editid'];
 $clientmsaid=$_SESSION['clientmsaid'];
 $name=$_POST['name'];
@@ -61,7 +59,7 @@ echo "<script type='text/javascript'> document.location ='account-list.php'; </s
 	<!-- Graph CSS -->
 	<link href="css/font-awesome.css" rel="stylesheet"> 
 	<!-- jQuery -->
-	<link href='//fonts.googleapis.com/css?family=Roboto:700,500,300,100italic,100,400' rel='stylesheet' type='text/css'>
+	<link href="css/google-font.css" rel='stylesheet' type='text/css'>
 	<!-- lined-icons -->
 	<link rel="stylesheet" href="css/icon-font.min.css" type='text/css' />
 	<!-- //lined-icons -->
@@ -73,7 +71,7 @@ echo "<script type='text/javascript'> document.location ='account-list.php'; </s
 	<script src="js/skycons.js"></script>
 	<!--//skycons-icons-->
 </head> 
-<body>
+<body style="background-image: url('http://localhost/SecurityGuardSystem/admin/images/bg.jpg');">
 <div class="page-container">
 <!--/content-inner-->
 <div class="left-content">
@@ -86,28 +84,27 @@ echo "<script type='text/javascript'> document.location ='account-list.php'; </s
 <div class="sub-heard-part">
 <ol class="breadcrumb m-b-0">
 <li><a href="dashboard.php">Home</a></li>
-<li class="active">Update Account</li>
+<li class="active"style="color:white;">Update Account</li>
+<div class="datebar" style="float: right;color:white;"><span  class = "label label-info"><i class="fa fa-calendar"></i></span> <?php echo date("F d, Y");?></div>
 </ol>
 </div>	
 					<!--/sub-heard-part-->	
 					<!--/forms-->
 <div class="forms-main">
-<h2 class="inner-tittle">Update Account </h2>
 <div class="graph-form">
 <div class="form-body">
 <form method="post"> 
-	<?php
+
+<?php
 $eid=$_GET['editid'];
 $sql="SELECT * from tblaccount where AccountID=:eid";
 $query = $dbh -> prepare($sql);
-$query->bindParam(':eid',$eid,PDO::PARAM_STR);
+$query->bindParam(':eid',$eid);
 $query->execute();
 $results=$query->fetchAll(PDO::FETCH_OBJ);
 $cnt=1;
-if($query->rowCount() > 0)
-{
-foreach($results as $row)
-{               ?>								
+if($query->rowCount() > 0){
+foreach($results as $row){               ?>								
 	<div class="row">
 <div class="form-group col-xs-4"> <label>Name</label> <input type="text" name="name" value="<?php  echo $row->Name;?>" class="form-control" required='true'> </div>
 <div class="form-group col-xs-4"> <label>Position</label>
@@ -125,15 +122,15 @@ foreach($results as $row)
 	</select> </div> 
 </div> 
 </div>
-<div class="row">
-<div class="form-group col-xs-3"> <label>Phone</label> <input type="text" name="phone"  value="<?php  echo $row->Phone;?>" class="form-control" required='true'> </div>
-<div class="form-group col-xs-3"> <label>Work Permit due date</label> <input type="date" name="permitdate"  value="<?php  echo $row->WorkingPermitDueDate;?>" class="form-control" required='true'> </div>
-<div class="form-group col-xs-3"> <label>Race</label> <input type="text" name="race"  value="<?php  echo $row->Race;?>" class="form-control" required='true'> </div>
-<div class="form-group col-xs-3"> <label>Nationality</label> <input type="text" name="nationality"  value="<?php  echo $row->Nationality;?>" class="form-control" required='true'> </div>
+	<div class="row">
+		<div class="form-group col-xs-3"> <label>Phone</label> <input type="text" name="phone"  value="<?php  echo $row->Phone;?>" class="form-control" required='true'> </div>
+		<div class="form-group col-xs-3"> <label>Work Permit due date</label> <input type="date" name="permitdate"  value="<?php  echo $row->WorkingPermitDueDate;?>" class="form-control" required='true'> </div>
+		<div class="form-group col-xs-3"> <label>Race</label> <input type="text" name="race"  value="<?php  echo $row->Race;?>" class="form-control" required='true'> </div>
+		<div class="form-group col-xs-3"> <label>Nationality</label> <input type="text" name="nationality"  value="<?php  echo $row->Nationality;?>" class="form-control" required='true'> </div>
 </div>
-<div class="row">
-<div class="form-group col-xs-3"> <label>Age</label> <input type="text" name="age"  value="<?php  echo $row->Age;?>" class="form-control" required='true'> </div>
-<div class="form-group col-xs-3"> <label>Passport Number</label> <input type="text" name="ppno"  value="<?php  echo $row->PassportNo;?>" class="form-control" required='true'> </div>
+	<div class="row">
+		<div class="form-group col-xs-3"> <label>Age</label> <input type="text" name="age"  value="<?php  echo $row->Age;?>" class="form-control" required='true'> </div>
+		<div class="form-group col-xs-3"> <label>Passport Number</label> <input type="text" name="ppno"  value="<?php  echo $row->PassportNo;?>" class="form-control" required='true'> </div>
 
 <div class="row">
 <div class="form-group col-xs-3"> <label>Status</label>
@@ -143,14 +140,15 @@ foreach($results as $row)
         <option value="Retired">Retired</option>
 	</select> </div> 
 </div> 
-<div class="row">
-<div class="form-group col-xs-6"> <label>Profile Image</label><input type="file" value="<?php  echo $row->Picture;?>" name="picture" ><!--<img id="profile" src="#" alt="Profile Picture" width="100px" height="100px" />--></div>
-<div class="form-group col-xs-6"> <label>Medical Check up</label><input type="file" value="<?php  echo $row->Medical_CheckUp;?>" name="medical" ></div>
+	<div class="row">
+		<div class="form-group col-xs-6"> <label>Profile Image</label><input type="file" value="<?php  echo $row->Picture;?>" name="picture" ><!--<img id="profile" src="#" alt="Profile Picture" width="100px" height="100px" />--></div>
+		<div class="form-group col-xs-6"> <label>Medical Check up</label><input type="file" value="<?php  echo $row->Medical_CheckUp;?>" name="medical" ></div>
 </div>
-<div class="row">
-<div class="form-group col-xs-6"> <label>Passport copy</label><input type="file" value="<?php  echo $row->PassportCopy;?>" name="ppcopy" ></div>
-<div class="form-group col-xs-6"> <label>Other</label><input type="file" value="<?php  echo $row->Other;?>" name="other" ></div>
-</div><?php $cnt=$cnt+1;}} ?>
+	<div class="row">
+		<div class="form-group col-xs-6"> <label>Passport copy</label><input type="file" value="<?php  echo $row->PassportCopy;?>" name="ppcopy" ></div>
+		<div class="form-group col-xs-6"> <label>Other</label><input type="file" value="<?php  echo $row->Other;?>" name="other" ></div>
+</div>
+<?php $cnt=$cnt+1;}} ?>
 	 <button type="submit" class="btn btn-default" name="submit" id="submit">Update</button><input type="button" class="btn btn-default" value="Back" onClick="history.back();return true;"> </form> 
 </div>
 </div>
@@ -166,13 +164,11 @@ foreach($results as $row)
 		var toggle = true;
 
 		$(".sidebar-icon").click(function() {                
-			if (toggle)
-			{
+			if (toggle){
 				$(".page-container").addClass("sidebar-collapsed").removeClass("sidebar-collapsed-back");
 				$("#menu span").css({"position":"absolute"});
 			}
-			else
-			{
+			else{
 				$(".page-container").removeClass("sidebar-collapsed").addClass("sidebar-collapsed-back");
 				setTimeout(function() {
 					$("#menu span").css({"position":"relative"});

@@ -1,18 +1,33 @@
 <?php
-session_start();
 include('includes/dbconnection.php');
 if (strlen($_SESSION['clientmsaid']==0)) {
   header('location:logout.php');
   } else{
 	  
   	?>
-
 <!DOCTYPE HTML>
 <html>
 <head>
 
 	<title>Security Guard Management System|| Manage Guard </title>
-	
+	<script>
+		var toggle = true;
+
+		$(".sidebar-icon").click(function() {                
+			if (toggle){
+				$(".page-container").addClass("sidebar-collapsed").removeClass("sidebar-collapsed-back");
+				$("#menu span").css({"position":"absolute"});
+			}
+			else{
+				$(".page-container").removeClass("sidebar-collapsed").addClass("sidebar-collapsed-back");
+				setTimeout(function() {
+					$("#menu span").css({"position":"relative"});
+				}, 400);
+			}
+
+			toggle = !toggle;
+		});
+	</script>
 	<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
 	<!-- Bootstrap Core CSS -->
 	<link href="css/bootstrap.min.css" rel='stylesheet' type='text/css' />
@@ -27,9 +42,12 @@ if (strlen($_SESSION['clientmsaid']==0)) {
 	<!-- /js -->
 	<script src="js/jquery-1.10.2.min.js"></script>
 	<!-- //js-->
+
 	
 </head> 
-<body>
+
+<body style="background-image: url('http://localhost/SecurityGuardSystem/admin/images/bg.jpg');">
+
 	<div class="page-container">
 		<!--/content-inner-->
 		<div class="left-content">
@@ -43,16 +61,12 @@ if (strlen($_SESSION['clientmsaid']==0)) {
 					<div class="sub-heard-part">
 						<ol class="breadcrumb m-b-0">
 							<li><a href="dashboard.php">Home</a></li>
-							<li class="active">Manage Guard</li>
-
+							<li class="active" style="color:white;">Manage Guard</li>
+							<div class="datebar" style="float: right;color:white; "><span  class = "label label-info"><i class="fa fa-calendar"></i></span> <?php echo date("F d, Y");?></div>
 						</ol>
 					</div>
 					<!--//sub-heard-part-->
 					<div class="graph-visual tables-main">
-						
-					
-						<h3 class="inner-tittle two">Manage Guard 
-                        <a name="add" id="add" class="btn btn-primary" href="add-account.php" role="button">Add Guard</a></h3>
 
 						<div class="graph">
 							<div class="tables">
@@ -64,17 +78,21 @@ if (strlen($_SESSION['clientmsaid']==0)) {
 							</select> entries</label></div>
 
 							<div class="dataTables_filter" id="data-table_filter"><label>Search: <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for ID"></label></div>
-							-->	<table id="data-table"class="table" border="1"> <thead> <tr> <th>#</th> 
-									<th>Account ID</th>
+							-->	
+							<table id="data-table"class="table" border="1"> 
+							<a style="float: right;" name="add" id="add" class="btn btn-primary" href="add-account.php" role="button">Add Guard</a>
+							<thead> <tr> <th>#</th> 
+									<th>ID</th>
                                     <th>Picture</th>
 									 <th>Name</th> 
 									 <th>Phone</th>
 									 <th>Position</th>
 									 <th>Nationality</th>
-									 <th>Working Permit Due Date</th>
+									 <th>Working Permit Date</th>
 									 <th>Status</th>
 									  <th>Action</th>
                                       </tr>
+									  
 									   </thead>
 									    <tbody>
 
@@ -102,7 +120,8 @@ foreach($results as $row)
 									         <td><?php  echo htmlentities($row->Nationality);?></td>
                                              <td><?php  echo htmlentities($row->WorkingPermitDueDate);?></td>
 											 <td><?php  echo htmlentities($row->Status);?></td>
-									        <td><a href="account-update.php?editid=<?php echo $row->AccountID;?>">Edit</a></td>
+									        <td><a href="account-view.php?editid=<?php echo $row->AccountID;?>">View||</a><a href="account-update.php?editid=<?php echo $row->AccountID;?>">Edit</a></td>
+											
 									     </tr>
 									     <?php $cnt=$cnt+1;}} ?>
 									     </tbody> </table> 
@@ -113,7 +132,7 @@ foreach($results as $row)
 					</div>
 					<!--//graph-visual-->
 				</div>
-				
+				</div>
 				<!--//outer-wp-->
 				<?php include_once('includes/footer.php');?>
 			</div>
@@ -123,26 +142,7 @@ foreach($results as $row)
 		<?php include_once('includes/sidebar.php');?>
 	
 	</div>
-	<script>
-		var toggle = true;
-
-		$(".sidebar-icon").click(function() {                
-			if (toggle)
-			{
-				$(".page-container").addClass("sidebar-collapsed").removeClass("sidebar-collapsed-back");
-				$("#menu span").css({"position":"absolute"});
-			}
-			else
-			{
-				$(".page-container").removeClass("sidebar-collapsed").addClass("sidebar-collapsed-back");
-				setTimeout(function() {
-					$("#menu span").css({"position":"relative"});
-				}, 400);
-			}
-
-			toggle = !toggle;
-		});
-	</script>
+	
 	<!--js -->
 	<?php include('../includes/js.php');?>  
 	<script src="js/jquery.nicescroll.js"></script>
@@ -151,29 +151,6 @@ foreach($results as $row)
 	<script src="js/bootstrap.min.js"></script>
 
 
-	<script>
-function myFunction() {
-  // Declare variables
-  var input, filter, table, tr, td, i, txtValue;
-  input = document.getElementById("myInput");
-  filter = input.value.toUpperCase();
-  table = document.getElementById("data-tables");
-  tr = table.getElementsByTagName("tr");
-
-  // Loop through all table rows, and hide those who don't match the search query
-  for (i = 0; i < tr.length; i++) {
-    td = tr[i].getElementsByTagName("td")[0];
-    if (td) {
-      txtValue = td.textContent || td.innerText;
-      if (txtValue.toUpperCase().indexOf(filter) > -1) {
-        tr[i].style.display = "";
-      } else {
-        tr[i].style.display = "none";
-      }
-    }
-  }
-}
-</script>
 </body>
 </html>
 <?php }?>

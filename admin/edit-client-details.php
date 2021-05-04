@@ -1,11 +1,9 @@
 <?php
-session_start();
 include('includes/dbconnection.php');
 if (strlen($_SESSION['clientmsaid']==0)) {
   header('location:logout.php');
   } else{
-    if(isset($_POST['submit']))
-  {
+    if(isset($_POST['submit'])){
 $eid=$_GET['editid'];
 $clientmsaid=$_SESSION['clientmsaid'];
  $cname=$_POST['cname'];
@@ -33,6 +31,7 @@ $query->bindParam(':email',$email,PDO::PARAM_STR);
 $query->bindParam(':status',$status,PDO::PARAM_STR);
 $query->bindParam(':eid',$eid,PDO::PARAM_STR);
 $query->execute();
+
 echo '<script>alert("Client details has been updated")</script>';
 echo "<script type='text/javascript'> document.location ='manage-client.php'; </script>";
   }
@@ -50,7 +49,7 @@ echo "<script type='text/javascript'> document.location ='manage-client.php'; </
 	<!-- Graph CSS -->
 	<link href="css/font-awesome.css" rel="stylesheet"> 
 	<!-- jQuery -->
-	<link href='//fonts.googleapis.com/css?family=Roboto:700,500,300,100italic,100,400' rel='stylesheet' type='text/css'>
+	<link href="css/google-font.css" rel='stylesheet' type='text/css'>
 	<!-- lined-icons -->
 	<link rel="stylesheet" href="css/icon-font.min.css" type='text/css' />
 	<!-- //lined-icons -->
@@ -61,11 +60,9 @@ echo "<script type='text/javascript'> document.location ='manage-client.php'; </
 	<!--skycons-icons-->
 	<script src="js/skycons.js"></script>
 	<!--//skycons-icons-->
-	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.css">
-	<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.js"></script>
 
 </head> 
-<body>
+<body style="background-image: url('http://localhost/SecurityGuardSystem/admin/images/bg.jpg');">
 
 <div class="page-container">
 <!--/content-inner-->
@@ -79,13 +76,12 @@ echo "<script type='text/javascript'> document.location ='manage-client.php'; </
 <div class="sub-heard-part">
 <ol class="breadcrumb m-b-0">
 <li><a href="dashboard.php">Home</a></li>
-<li class="active">Update Clients</li>
+<li class="active"style="color:white;">Update Clients</li>
 </ol>
 </div>	
 					<!--/sub-heard-part-->	
 					<!--/forms-->
 <div class="forms-main">
-<h2 class="inner-tittle">Update Clients </h2>
 <div class="graph-form">
 <div class="form-body">
 <form method="post"> 
@@ -97,10 +93,8 @@ $query->bindParam(':eid',$eid,PDO::PARAM_STR);
 $query->execute();
 $results=$query->fetchAll(PDO::FETCH_OBJ);
 $cnt=1;
-if($query->rowCount() > 0)
-{
-foreach($results as $row)
-{               ?>								
+if($query->rowCount() > 0){
+foreach($results as $row){               ?>								
 	<div class="row">
 <div class="form-group col-xs-4"> <label>Contact Name</label> <input  type="text" name="cname"  value="<?php  echo $row->ContactName;?>" class="form-control" required='true'> </div>
 <div class="form-group col-xs-4"> <label>Company Name</label> <input type="text" name="comname" value="<?php  echo $row->CompanyName;?>" class="form-control" required='true'> </div></div>

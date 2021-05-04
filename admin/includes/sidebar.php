@@ -44,7 +44,12 @@ foreach($results as $row)
 
             <li><a href="service-assign.php"><i class="fa fa-user"></i> <span>Service Assignation</span></a></li>
             <li><a href="manage-client.php"><i class="fa fa-table"></i> <span>Clients List</span></a></li>
-            <li><a href="invoices.php"><i class="fa fa-file-text-o"></i> <span>Invoices</span></a></li>
+            <li><a href="invoices.php"><i class="fa fa-file-text-o"></i> <span>Invoices</span><span class="fa fa-angle-right" style="float: right"></a>
+            <ul id="menu-academico-sub" >
+                    <li id="menu-academico-avaliacoes" ><a href="invoice-add.php">Add Invoice</a></li><span class="fa fa-angle-right" style="float: right"></span>
+                    <li id="menu-academico-boletim" ><a href="invoices.php">View Invoice</a><span class="fa fa-angle-right" style="float: right"></span></li>
+                </ul>
+            </li>
 
             <li id="menu-academico" ><a href="#"><i class="fa fa-table"></i> <span> Feedback</span> <span class="fa fa-angle-right" style="float: right"></span></a>
             </li>

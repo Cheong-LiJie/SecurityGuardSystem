@@ -1,12 +1,10 @@
 <?php
-session_start();
 include('includes/dbconnection.php');
 if (strlen($_SESSION['clientmsaid']==0)) {
   header('location:logout.php');
   } else{
-    if(isset($_POST['submit']))
-  {
-$clientmsaid=$_SESSION['clientmsaid'];
+    if(isset($_POST['submit'])){
+ $clientmsaid=$_SESSION['clientmsaid'];
  $name=$_POST['name'];
  $pw=md5($_POST['pw']);
  $phone=$_POST['phone'];
@@ -22,7 +20,6 @@ $clientmsaid=$_SESSION['clientmsaid'];
  $ppcopy=$_POST['ppcopy'];
  $permitdate=$_POST['permitdate'];
  $other=$_POST['other'];
- 
  
 $sql="insert into tblaccount( Name, Password,Phone, WorkingPermitDueDate, Race, Nationality, Age, Position,PassportNo, Visa_Status,Status,Picture, Medical_CheckUp, Passport_Copy,other) values(:name,:pw,:phone,:permitdate,:race,:nationality,:age,:position,:ppno,:visastatus,:status,:picture,:medical,:ppcopy,:other)";
 $query=$dbh->prepare($sql);
@@ -63,7 +60,7 @@ echo "<script>document.location='account-list.php'</script>";
 	<!-- Graph CSS -->
 	<link href="css/font-awesome.css" rel="stylesheet"> 
 	<!-- jQuery -->
-	<link href='//fonts.googleapis.com/css?family=Roboto:700,500,300,100italic,100,400' rel='stylesheet' type='text/css'>
+	<link href="css/google-font.css" rel='stylesheet' type='text/css'>
 	<!-- lined-icons -->
 	<link rel="stylesheet" href="css/icon-font.min.css" type='text/css' />
 	<!-- //lined-icons -->
@@ -75,7 +72,7 @@ echo "<script>document.location='account-list.php'</script>";
 	<script src="js/skycons.js"></script>
 	<!--//skycons-icons-->
 </head> 
-<body>
+<body style="background-image: url('http://localhost/SecurityGuardSystem/admin/images/bg.jpg');">
 <div class="page-container">
 <!--/content-inner-->
 <div class="left-content">
@@ -88,15 +85,13 @@ echo "<script>document.location='account-list.php'</script>";
 <div class="sub-heard-part">
 <ol class="breadcrumb m-b-0">
 <li><a href="dashboard.php">Home</a></li>
-<li class="active">Add Account</li>
+<li class="active"style="color:white;">Add Account</li>
+<div class="datebar" style="float: right;color:white;"><span  class = "label label-info"><i class="fa fa-calendar"></i></span> <?php echo date("F d, Y");?></div>
 </ol>
 </div>	
-
-
 					<!--/sub-heard-part-->	
 					<!--/forms-->
 <div class="forms-main">
-<h2 class="inner-tittle">Add Account </h2>
 <div class="graph-form">
 <div class="form-body">
 <form method="post"> 
@@ -141,6 +136,7 @@ echo "<script>document.location='account-list.php'</script>";
 </div>
 <div>
 <button type="submit" class="btn btn-default" name="submit" id="submit">Save</button> </form> 
+<input type="button" class="btn btn-default" value="Back" onClick="history.back();return true;">
 </div>
 </div> 
 </div> 
@@ -180,13 +176,11 @@ var reader2 = new FileReader();
 <script>
 		var toggle = true;
 		$(".sidebar-icon").click(function() {                
-			if (toggle)
-			{
+			if (toggle){
 				$(".page-container").addClass("sidebar-collapsed").removeClass("sidebar-collapsed-back");
 				$("#menu span").css({"position":"absolute"});
 			}
-			else
-			{
+			else{
 				$(".page-container").removeClass("sidebar-collapsed").addClass("sidebar-collapsed-back");
 				setTimeout(function() {
 					$("#menu span").css({"position":"relative"});

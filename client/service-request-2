@@ -1,4 +1,5 @@
 <?php
+session_start();
 include('includes/dbconnection.php');
 if (strlen($_SESSION['clientmsuid']==0)) {
   header('location:logout.php');
@@ -70,14 +71,14 @@ if (strlen($_SESSION['clientmsuid']==0)) {
 	<!-- Graph CSS -->
 	<link href="css/font-awesome.css" rel="stylesheet"> 
 	<!-- jQuery -->
-	<link href="css/google-font.css" rel='stylesheet' type='text/css'>
+	<link href='//fonts.googleapis.com/css?family=Roboto:700,500,300,100italic,100,400' rel='stylesheet' type='text/css'>
 	<!-- lined-icons -->
 	<link rel="stylesheet" href="css/icon-font.min.css" type='text/css' />
 	<!-- /js -->
 	<script src="js/jquery-1.10.2.min.js"></script>
 	<!-- //js-->
 </head> 
-<body style="background-image: url('http://localhost/SecurityGuardSystem/admin/images/bg.jpg');">
+<body>
 	<div class="page-container">
 		<!--/content-inner-->
 		<div class="left-content">
@@ -91,8 +92,7 @@ if (strlen($_SESSION['clientmsuid']==0)) {
 					<div class="sub-heard-part">
 						<ol class="breadcrumb m-b-0">
 							<li><a href="dashboard.php">Home</a></li>
-							<li class="active"style="color:white;">Services Request</li>
-							<div class="datebar" style="float: right;color:white;"><span  class = "label label-info"><i class="fa fa-calendar"></i></span> <?php echo date("F d, Y");?></div>
+							<li class="active">Services Request</li>
 						</ol>
 					</div>
 					<!--//sub-heard-part-->
@@ -111,24 +111,28 @@ if($query->rowCount() > 0)
 foreach($results as $row)
 {               ?>
 <div class="forms-main">
+<h2 class="inner-tittle">Services Request </h2>
 <div class="graph-form">
 <div class="form-body">
 <form method="post"> 
 
 
+<h3>Confirm Your Details</h3>
 
+<div class="row">
+<div class="form-group col-xs-1"> <label>ID</label> <input aria-hidden="true" type="hidden" name="id" value="<?php  echo $row->client_id;?>" class="form-control" readonly> </div>
+<div class="form-group col-xs-3"> <label>Company Name</label> <input hidden type="hidden" name="comname" value="<?php  echo $row->CompanyName;?>" class="form-control" required='true' readonly> </div>
+<div class="form-group col-xs-3"> <label>Contact Name</label> <input type="hidden" name="cname" value="<?php  echo $row->ContactName;?>" class="form-control" required='true' readonly> </div>
+<div class="form-group col-xs-2"> <label>Phone</label> <input type="hidden" name="phone"  value="<?php  echo $row->Workphnumber;?>" class="form-control" required='true' readonly> </div>
+<div class="form-group col-xs-3"> <label>Email</label> <input type="hidden" name="email"  value="<?php  echo $row->Email;?>" class="form-control" required='true' readonly> </div>
+</div>
 
-
-<input type="hidden" name="id" value="<?php  echo $row->client_id;?>" class="form-control" readonly> 
-<input type="hidden" name="comname" value="<?php  echo $row->CompanyName;?>" class="form-control" required='true' readonly>
-<input type="hidden" name="cname" value="<?php  echo $row->ContactName;?>" class="form-control" required='true' readonly> 
-<input type="hidden" name="phone"  value="<?php  echo $row->Workphnumber;?>" class="form-control" required='true' readonly> 
-<input type="hidden" name="email"  value="<?php  echo $row->Email;?>" class="form-control" required='true' readonly>
-<input type="hidden" name="address"  value="<?php  echo $row->Address;?>" class="form-control" required='true' readonly> 
-<input type="hidden" name="city"  value="<?php  echo $row->City;?>" class="form-control" required='true' readonly>
-<input type="hidden" name="postcode"  value="<?php  echo $row->Postcode;?>" class="form-control" required='true' readonly> 
-<input type="hidden" name="state"  value="<?php  echo $row->State;?>" class="form-control" required='true' readonly> 
-
+<div class="row">
+<div class="form-group col-xs-3"> <label>Address</label> <input type="hidden" name="address"  value="<?php  echo $row->Address;?>" class="form-control" required='true' readonly> </div>
+<div class="form-group col-xs-3"> <label>City</label> <input type="hidden" name="city"  value="<?php  echo $row->City;?>" class="form-control" required='true' readonly> </div>
+<div class="form-group col-xs-3"> <label>PostCode</label> <input type="hidden" name="postcode"  value="<?php  echo $row->Postcode;?>" class="form-control" required='true' readonly> </div>
+<div class="form-group col-xs-3"> <label>State</label> <input type="hidden" name="state"  value="<?php  echo $row->State;?>" class="form-control" required='true' readonly> </div>
+</div> 
 <?php $cnt=$cnt+1;}} ?>
 
 <h3>Please fill-in your service request details</h3>
