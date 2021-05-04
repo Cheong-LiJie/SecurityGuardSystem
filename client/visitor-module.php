@@ -58,7 +58,7 @@ if (strlen($_SESSION['clientmsuid']==0)) {
 									<th>Visited Location</th>
                                     <th>Visit Method</th>
 									<th>Remarks</th>
-                                    <th>Fill by</th>
+                                    
                                     <th>Status</th>
                                     <th>View Profile</th>
 									</tr>
@@ -67,7 +67,7 @@ if (strlen($_SESSION['clientmsuid']==0)) {
 									<tbody>
 									<?php
 									
-$sql="select * from  tblvisitor";
+$sql="select *, TIMESTAMPDIFF (MINUTE,walkinTime,walkoutTime) AS totalTime from tblvisitor";
 $query = $dbh -> prepare($sql);
 
 $query->execute();
@@ -84,12 +84,12 @@ foreach($results as $row)
 									       <td><?php  echo htmlentities($row->visitorDate);?></td>
 									       <td><?php  echo htmlentities($row->walkinTime);?></td>
 									       <td><?php  echo htmlentities($row->walkoutTime);?></td>
-										   <td><?php  echo htmlentities($row->totalTime);?></td>
+										   <td><?php  echo htmlentities($row->totalTime);?> Minutes</td>
 									       <td><?php  echo htmlentities($row->visitLocation);?></td>
 									       <td><?php  echo htmlentities($row->visitMethod);?></td>
 										   <td><?php  echo htmlentities($row->visitRemark);?></td>
 									       <td><?php  echo htmlentities($row->visitStatus);?></td>
-										   <td><a href="view-invoice.php?invoiceid=<?php  echo $row->BillingId;?>">Edit</a></td>
+										  
 									       <td><a href="view-visitor.php?visitorid=<?php echo $row->visitorID;?>">View</a></td>
 									     </tr>
 									     <?php $cnt=$cnt+1;}} ?>
