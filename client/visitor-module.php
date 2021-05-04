@@ -91,7 +91,7 @@ foreach($results as $row)
 										   <td><?php  echo htmlentities($row->visitRemark);?></td>
 									       <td><?php  echo htmlentities($row->visitStatus);?></td>
 										   <td><a href="view-invoice.php?invoiceid=<?php  echo $row->BillingId;?>">Edit</a></td>
-									       <td><a href="view-invoice.php?invoiceid=<?php  echo $row->BillingId;?>">View</a></td>
+									       <td><a href="view-visitor.php?visitorid=<?php echo $row->visitorID;?>">View</a></td>
 									     </tr>
 									     <?php $cnt=$cnt+1;}} ?>
 									     </tbody> </table> 

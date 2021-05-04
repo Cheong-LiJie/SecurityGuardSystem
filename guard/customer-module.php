@@ -71,7 +71,7 @@ if (strlen($_SESSION['clientmsuid']==0)) {
 									<tbody>
 									<?php
 									
-$sql="select * from tblvisitor";
+$sql="select *, TIMESTAMPDIFF (MINUTE,walkinTime,walkoutTime) AS totalTime from tblvisitor";
 $query = $dbh -> prepare($sql);
 
 $query->execute();
@@ -88,15 +88,15 @@ foreach($results as $row)
 									       <td><?php  echo ($row->visitorDate);?></td>
 									       <td><?php  echo ($row->walkinTime);?></td>
 									       <td><?php  echo ($row->walkoutTime);?></td>
-										   <td><?php  echo ($row->totalTime);?></td>
+										   <td><?php  echo ($row->totalTime);?> Minutes</td>										  
 									       <td><?php  echo ($row->visitLocation);?></td>
 									       <td><?php  echo ($row->visitMethod);?></td>
 										   <td><?php  echo($row->visitRemark);?></td>
 									       <td><?php  echo ($row->visitStatus);?></td>
-										   <td><a href="edit-visitor.php">Edit</a></td>
-									       <td><a href="view-visitor.php">View</a></td>
+										   <td><a href="edit-visitor.php?visitorid=<?php echo $row->visitorID;?>">Edit</a></td>
+									       <td><a href="view-visitor.php?visitorid=<?php echo $row->visitorID;?>">View</a></td>
 									     </tr>
-									     <?php $cnt=$cnt+1;}} ?>
+									     <?php $cnt=$cnt+1;}} ?> 
 									     </tbody> </table> 
 							</div>
 

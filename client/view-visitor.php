@@ -6,7 +6,20 @@ if (strlen($_SESSION['clientmsuid']==0)) {
   header('location:logout.php');
   } else{
   	?>
-	  					
+	  <?php
+
+$sql="select * from tblvisitor";
+$query = $dbh -> prepare($sql);
+$query->execute();
+
+$results=$query->fetchAll(PDO::FETCH_OBJ);
+
+$cnt=1;
+if($query->rowCount() > 0)
+{
+foreach($results as $row)
+{               ?>
+<?php $cnt=$cnt+1;}} ?>
 
 <!DOCTYPE HTML>
 <html>
@@ -41,25 +54,10 @@ if (strlen($_SESSION['clientmsuid']==0)) {
 					<div class="sub-heard-part">
 						<ol class="breadcrumb m-b-0">
 							<li><a href="dashboard.php">Home</a></li>
-							<li class="active">View Visitor Profile</li>
+							<li class="active">View Employee Profile</li>
 						</ol>
 					</div>
 					<!--//sub-heard-part-->
-					<?php
-$visid=intval($_GET['visitorid']);
-$sql="select * from tblvisitor where visitorID=:visid";
-$query = $dbh -> prepare($sql);
-$query->bindParam(':visid',$visid,PDO::PARAM_STR);
-$query->execute();
-
-$results=$query->fetchAll(PDO::FETCH_OBJ);
-
-$cnt=1;
-if($query->rowCount() > 0)
-{
-foreach($results as $row)
-{               ?>
-
 					<div class="forms-main">
 <div class="graph-form">
 <div class="form-body">
@@ -77,16 +75,16 @@ foreach($results as $row)
 <br>
 <div class="row">
 <div class="form-group col-xs-3"><label>Walk-Out Time: </label><input type="text" name="walkoutTime" class="form-control" value="<?php echo ($row->walkoutTime);?>"readonly></div>
+<div class="form-group col-xs-3"><label>Total Time: </label><input type="text" name="totalTime" class="form-control" value="<?php echo ($row->totalTime);?>"readonly></div>
 <div class="form-group col-xs-3"><label>Visit Method: </label><input type="text" name="visitMethod" class="form-control" value="<?php echo ($row->visitMethod);?>"readonly></div>
-<div class="form-group col-xs-3"><label>Remarks: </label><input type="text" name="visitRemark" class="form-control" value="<?php echo ($row->visitRemark);?>"readonly></div>
 </div>
 <br>
 <div class="row">
+<div class="form-group col-xs-3"><label>Remarks: </label><input type="text" name="visitRemark" class="form-control" value="<?php echo ($row->visitRemark);?>"readonly></div>
 <div class="form-group col-xs-3"><label>Status: </label><input type="text" name="visitStatus" class="form-control" value="<?php echo ($row->visitStatus);?>"readonly></div>
 </div>
 <br>
 <button type="button" class="btn btn-default" value="Go back!" onclick="history.back()">Back</button>
-<?php $cnt=$cnt+1;}} ?>
 							</div>
 
 						</div>

@@ -5,49 +5,46 @@ include('includes/dbconnection.php');
 if (strlen($_SESSION['clientmsuid']==0)) {
   header('location:logout.php');
   } else{
-	if(isset($_POST['submit']))
-	{
-		$visitorName =$_POST['visitorName']; 
-		$visitorIC = $_POST['visitorIC'];
-		$visitorPhone = $_POST['visitorPhone'];
-		$visitorDate = $_POST['visitorDate'];	
-		$visitLocation = $_POST['visitLocation'];
-		$walkinTime = $_POST['walkinTime'];
-		$visitMethod = $_POST['visitMethod'];
-		$visitRemark = $_POST['visitRemark'];
-		$visitStatus= $_POST['visitStatus'];
-
-		$sql = "insert into tblvisitor(visitorName,visitorIC,visitorPhone,visitorDate,visitLocation,walkinTime,visitMethod,visitRemark,visitStatus )values
-		(:visitorName,:visitorIC,:visitorPhone,:visitorDate,:visitLocation,:walkinTime,:visitMethod,:visitRemark,:visitStatus)";
-		   $query = $dbh -> prepare($sql);
+    if(isset($_POST['submit'])) 
+    {
+        $visid=$_GET['visitorid'];
+        $clientmsuid=$_SESSION['clientmsuid'];
+        $visitorName = $_POST['visitorName'];
+        $visitorIC = $_POST['visitorIC'];
+        $visitorPhone = $_POST['visitorPhone'];
+        $visitorDate = $_POST['visitorDate'];
+        $visitLocation = $_POST['visitLocation'];
+        $walkinTime = $_POST['walkinTime'];
+        $walkoutTime = $_POST['walkoutTime'];
+        $visitMethod = $_POST['visitMethod'];
+        $visitRemark = $_POST['visitRemark'];
+        $visitStatus = $_POST['visitStatus'];
+        
+        $sql="update tblvisitor set visitorName=:visitorName, visitorIC=:visitorIC, visitorPhone=:visitorPhone,visitorDate=:visitorDate, visitLocation=:visitLocation, walkinTime=:walkinTime, walkoutTime=:walkoutTime,  visitMethod=:visitMethod, visitRemark=:visitRemark, visitStatus=:visitStatus where visitorID=:visid";
+		$query = $dbh -> prepare($sql);
 $query->bindParam(':visitorName',$visitorName,PDO::PARAM_STR);
 $query->bindParam(':visitorIC',$visitorIC,PDO::PARAM_STR);
 $query->bindParam(':visitorPhone',$visitorPhone,PDO::PARAM_STR);
 $query->bindParam(':visitorDate',$visitorDate,PDO::PARAM_STR);
 $query->bindParam(':visitLocation',$visitLocation,PDO::PARAM_STR);
 $query->bindParam(':walkinTime',$walkinTime,PDO::PARAM_STR);
+$query->bindParam(':walkoutTime',$walkoutTime,PDO::PARAM_STR);
 $query->bindParam(':visitMethod',$visitMethod,PDO::PARAM_STR);
 $query->bindParam(':visitRemark',$visitRemark,PDO::PARAM_STR);
 $query->bindParam(':visitStatus',$visitStatus,PDO::PARAM_STR);
-		   $query->execute();
-		   $LastInsertId=$dbh->lastInsertId();
-   if ($LastInsertId>0) {
-    echo '<script>alert("Visitor has been added.")</script>';
-echo "<script>window.location.href ='add-visitor.php'</script>";
+$query->bindParam(':visid',$visid,PDO::PARAM_STR);
+$query->execute();
+echo '<script>alert("Profile details has been updated")</script>';
+echo "<script type='text/javascript'> document.location ='customer-module.php'; </script>";
   }
-  else
-    {
-         echo '<script>alert("Something Went Wrong. Please try again")</script>';
-    }
-		
-	}
-	
   	?>
+      
+	  					
 
 <!DOCTYPE HTML>
 <html>
 <head>
-	<title>Client Management Sysytem || Add Visitor </title>
+	<title>Client Management Sysytem || View Visitor </title>
 	<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
 	<!-- Bootstrap Core CSS -->
 	<link href="css/bootstrap.min.css" rel='stylesheet' type='text/css' />
@@ -77,42 +74,55 @@ echo "<script>window.location.href ='add-visitor.php'</script>";
 					<div class="sub-heard-part">
 						<ol class="breadcrumb m-b-0">
 							<li><a href="dashboard.php">Home</a></li>
-							<li class="active"><a href="customer-module.php">Customer Module</a></li>
-							<li class="active">Add Visitor Profile</li>
+							<li class="active">Edit Visitor Profile</li>
 						</ol>
 					</div>
 					<!--//sub-heard-part-->
 					<div class="forms-main">
 <div class="graph-form">
 <div class="form-body">
-<form method="post" action="">
+<form method="post">
+<?php
+$visid=$_GET['visitorid'];
+$sql="SELECT * from tblvisitor where visitorID=:visid";
+$query = $dbh -> prepare($sql);
+$query->bindParam(':visid',$visid,PDO::PARAM_STR);
+$query->execute();
+$results=$query->fetchAll(PDO::FETCH_OBJ);
+$cnt=1;
+if($query->rowCount() > 0)
+{
+foreach($results as $row)
+{               ?>			
 <div class="row"> 
-<div class="form-group col-xs-3"><label>Name: </label> <input type="text" name="visitorName" class="form-control" placeholder="Enter Name" required /></div>
-<div class="form-group col-xs-3"> <label>IC: </label> <input type="text" name="visitorIC" class="form-control" placeholder="Enter IC" required /></div>
-<div class="form-group col-xs-3"> <label>Phone Number:</label><input type="text" name="visitorPhone" class="form-control" placeholder="Enter Phone Number" required /></div>
+<div class="form-group col-xs-3"><label>Name: </label> <input type="text" name="visitorName" class="form-control" value="<?php echo ($row->visitorName);?>" required='true'></div>
+<div class="form-group col-xs-3"> <label>IC: </label> <input type="text" name="visitorIC" class="form-control" value="<?php echo ($row->visitorIC);?>"required='true'></div>
+<div class="form-group col-xs-3"> <label>Phone Number:</label><input type="text" name="visitorPhone" class="form-control"value="<?php echo ($row->visitorPhone);?>"required='true'></div>
 </div>
 <br>
 <div class="row"> 
-<div class="form-group col-xs-3"><label>Date Visited: </label><input type="text" name="visitorDate" class="form-control" value="<?php echo  "" . date("Y/m/d") . "";?>"readonly></div>
-<div class="form-group col-xs-3"><label>Visit Location: </label><input type="text" name="visitLocation" class="form-control" placeholder="Enter Visit Location" required /></div>
-<div class="form-group col-xs-3"><label>Walk-In Time: </label><input type="text" name="walkinTime" class="form-control" value="<?php date_default_timezone_set("Asia/Kuala_Lumpur"); echo "" . date("h:i:sa");?>"></div>
+<div class="form-group col-xs-3"><label>Date Visited: </label><input type="text" name="visitorDate" class="form-control" value="<?php echo ($row->visitorDate);?>"required='true'readonly></div>
+<div class="form-group col-xs-3"><label>Visit Location: </label><input type="text" name="visitLocation" class="form-control" value="<?php echo ($row->visitLocation);?>"required='true'></div>
+<div class="form-group col-xs-3"><label>Walk-In Time: </label><input type="text" name="walkinTime" class="form-control" value="<?php echo ($row->walkinTime);?>"required='true'></div>
 </div>
 <br>
-<div class="row"> 
-<div class="form-group col-xs-3"><label>Visit Method: </label><input type="text" name="visitMethod" class="form-control" placeholder ="Enter Visit Method" required /></div>
-<div class="form-group col-xs-3"><label>Remarks: </label><input type="text" name="visitRemark" class="form-control" placeholder ="Enter Remarks" required /></div>
+<div class="row">
+<div class="form-group col-xs-3"><label>Walk-Out Time: </label><input type="text" name="walkoutTime" class="form-control" value="<?php echo ($row->walkoutTime);?>"required='true'></div>
+<div class="form-group col-xs-3"><label>Visit Method: </label><input type="text" name="visitMethod" class="form-control" value="<?php echo ($row->visitMethod);?>"required='true'></div>
+<div class="form-group col-xs-3"><label>Remarks: </label><input type="text" name="visitRemark" class="form-control" value="<?php echo ($row->visitRemark);?>"required='true'></div>
+</div>
+<br>
+<div class="row">
 <div class="form-group col-xs-3"><label>Status: </label>
 <select style="height:50px" name="visitStatus"  class="form-control" value="<?php  echo $row->visitStatus;?>">
 		<option value="Visiting">Visiting</option>
-</select></div>
-</div>  
-<br>                             
-<button type="button" class="btn btn-default" value="Go back!" onclick="history.back()">Back</button>
-<button type="submit" input name="submit" class="btn btn-default">Add</button>
-								
-
-								</form>
-
+		<option value="Leaving">Leaving</option>
+	</select></div>
+</div>
+<?php $cnt=$cnt+1;}} ?>
+<br>
+<button type="button" class="btn btn-default" value="Back" onclick="history.back()">Back</button>
+<button type="submit" input name="submit" class="btn btn-default">Update</button>
 							</div>
 
 						</div>
