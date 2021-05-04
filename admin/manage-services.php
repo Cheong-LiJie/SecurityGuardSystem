@@ -21,10 +21,7 @@ if (strlen($_SESSION['clientmsaid']==0)) {
 	<!-- jQuery -->
 	<link href='//fonts.googleapis.com/css?family=Roboto:700,500,300,100italic,100,400' rel='stylesheet' type='text/css'>
 	<!-- lined-icons -->
-	<link rel="stylesheet" href="css/icon-font.min.css" type='text/css' />
-	<!-- /js -->
-	<script src="js/jquery-1.10.2.min.js"></script>
-	<!-- //js-->
+
 </head> 
 <body>
 	<div class="page-container">
@@ -50,7 +47,7 @@ if (strlen($_SESSION['clientmsaid']==0)) {
 						<h3 class="inner-tittle two">Manage Services </h3>
 						<div class="graph">
 							<div class="tables">
-								<table class="table" border="1"> <thead> <tr> <th>#</th> 
+								<table id="data-table" class="table" border="1"> <thead> <tr> <th>#</th> 
 									<th>Service Name</th>
 									 <th>Service Price</th> 
 									 <th>Creation Date</th>
@@ -96,27 +93,9 @@ foreach($results as $row)
 		<?php include_once('includes/sidebar.php');?>
 		<div class="clearfix"></div>		
 	</div>
-	<script>
-		var toggle = true;
 
-		$(".sidebar-icon").click(function() {                
-			if (toggle)
-			{
-				$(".page-container").addClass("sidebar-collapsed").removeClass("sidebar-collapsed-back");
-				$("#menu span").css({"position":"absolute"});
-			}
-			else
-			{
-				$(".page-container").removeClass("sidebar-collapsed").addClass("sidebar-collapsed-back");
-				setTimeout(function() {
-					$("#menu span").css({"position":"relative"});
-				}, 400);
-			}
-
-			toggle = !toggle;
-		});
-	</script>
 	<!--js -->
+	<?php include('../includes/js.php');?>  
 	<script src="js/jquery.nicescroll.js"></script>
 	<script src="js/scripts.js"></script>
 	<!-- Bootstrap Core JavaScript -->

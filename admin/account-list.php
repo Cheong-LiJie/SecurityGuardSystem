@@ -42,6 +42,7 @@ if (strlen($_SESSION['clientmsaid']==0)) {
 	<!-- /js -->
 	<script src="js/jquery-1.10.2.min.js"></script>
 	<!-- //js-->
+
 	
 </head> 
 

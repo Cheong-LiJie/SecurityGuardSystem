@@ -1,6 +1,4 @@
 <?php
-session_start();
-error_reporting(0);
 include('includes/dbconnection.php');
 if (strlen($_SESSION['clientmsuid']==0)) {
   header('location:logout.php');
@@ -47,7 +45,8 @@ if (strlen($_SESSION['clientmsuid']==0)) {
 					<div class="graph-visual tables-main">
 						<div class="graph">
 							<div class="tables">
-								<table class="table" border="1"> <thead> 
+								<table id="data-table" class="table" border="1"> 
+									<thead> 
     
                                 <tr> 
                                     <th>No.</th> 
@@ -132,6 +131,7 @@ foreach($results as $row)
 		});
 	</script>
 	<!--js -->
+	<?php include('../includes/js.php');?>
 	<script src="js/jquery.nicescroll.js"></script>
 	<script src="js/scripts.js"></script>
 	<!-- Bootstrap Core JavaScript -->

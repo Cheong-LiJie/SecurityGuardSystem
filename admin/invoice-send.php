@@ -2,14 +2,7 @@
 include('includes/dbconnection.php');
 if (strlen($_SESSION['clientmsaid']==0)) {
   header('location:logout.php');
-  } else{
-    {
-
- 
-
-
-    
-
+  } else{{
     ?>
 
 <!DOCTYPE HTML>
@@ -20,7 +13,7 @@ if (strlen($_SESSION['clientmsaid']==0)) {
 	<!-- Bootstrap Core CSS -->
 	<link href="css/bootstrap.min.css" rel='stylesheet' type='text/css' />
 	<!-- Custom CSS -->
-	<link href="css/style.css" rel='stylesheet' type='text/css' />
+
 	<!-- Graph CSS -->
 	<link href="css/font-awesome.css" rel="stylesheet"> 
 	<!-- jQuery -->
@@ -53,7 +46,7 @@ if (strlen($_SESSION['clientmsaid']==0)) {
 
     <?php
 $serid=$_GET['serviceid'];
-$sql="SELECT * from  tblservices where ServiceID=:serid";
+$sql="SELECT * from  tblservices WHERE ServiceID=:serid ";
 $query = $dbh -> prepare($sql);
 $query->bindParam(':serid',$serid,PDO::PARAM_STR);
 $query->execute();
@@ -65,7 +58,7 @@ foreach($results as $row){
     <div class="col-xs-12 col-sm-3 col-md-4 col-lg-4">
         <h3>To,</h3>
             <?php  echo $row->CompanyName;?><br>
-            <?php  echo $row->Address;?>,<?php  echo $row->City;?>,<?php  echo $row->Postcode;?><?php  echo $row->State;?><br>
+            <?php  echo $row->Address;?>,<?php  echo $row->City;?>,<?php  echo $row->Postcode;?>,<?php  echo $row->State;?><br>
             <?php  echo $row->Phone;?><br>
             <?php  echo $row->Email;?><br>          
     </div>
@@ -76,43 +69,73 @@ foreach($results as $row){
             Invoice ID:<?php  echo $row->Phone;?><br>
             Date: <?php date_default_timezone_set("Singapore"); echo date("Y/m/d");?><br>
      </div>
-     <?php }} ?>
+    
 </div>
 </div>
+<?php }} ?>
+
+<!--Table-->
+<?php
+$serid=$_GET['serviceid'];
+$sql="SELECT *,Hour_Price+Day_Price+Month_Price AS SubTotal 
+    From(
+        Select *,
+            Guard_Hour*Hour*80 AS Hour_Price,
+            Guard_Day*Day*2000 AS Day_Price,
+            Guard_Month*Month*60000 AS Month_Price
+        from  tblservicedetail WHERE ServiceID=:serid) t ";
+$query = $dbh -> prepare($sql);
+$query->bindParam(':serid',$serid,PDO::PARAM_STR);
+$query->execute();
+$results=$query->fetchAll(PDO::FETCH_OBJ);
+$cnt=1;
+if($query->rowCount() > 0){
+foreach($results as $row){               
+    ?>
 <div class="row">
-<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-<table class="table table-bordered table-hover" id="invoiceItem">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    <table id="data-table"class="table table-bordered table-hover" id="invoiceItem" width="100%" >
     <tr>
-        <th width="2%"><input id="checkAll" class="formcontrol" type="checkbox"></th>
-        <th width="15%">Item No</th>
-        <th width="38%">Item Name</th>
-        <th width="15%">Quantity</th>
-        <th width="15%">Price</th>
-        <th width="15%">Total</th>
+        <th width="2%">#</th>
+        <th width="15%">Item Name</th>
+        <th width="5%">Quatity</th>
+        <th width="5%">Frequency</th>
+        <th width="15%">Price(RM)</th>
+        <th width="10%">Total(RM)</th>
     </tr>
     <tr>
-        <td><input class="itemRow" type="checkbox"></td>
-        <td><input type="text" name="productCode[]" id="productCode_1" class="form-control" autocomplete="off"></td>
-        <td><input type="text" name="productName[]" id="productName_1" class="form-control" autocomplete="off"></td>
-        <td><input type="number" name="quantity[]" id="quantity_1" class="form-control quantity" autocomplete="off"></td>
-        <td><input type="number" name="price[]" id="price_1" class="form-control price" autocomplete="off"></td>
-        <td><input type="number" name="total[]" id="total_1" class="form-control total" autocomplete="off"></td>
+        <td>1</td>
+        <td>Guard per hour</td>
+        <td><?php  echo $row->Guard_Hour;?> Guards</td>
+        <td><?php  echo $row->Hour;?> Hours</td>
+        <td>RM80 Per hour</td>
+        <td style="text-align:right;"><?php  echo $row->Hour_Price;?></td>
     </tr>
+        <td>2</td>
+        <td>Guard per day</td>
+        <td><?php  echo $row->Guard_Day;?> Guards</td>
+        <td><?php  echo $row->Day;?> Day</td>
+        <td>RM2000 Per day</td>
+        <td style="text-align:right;"><?php  echo $row->Day_Price;?></td>
+    <tr>
+        <td>3</td>
+        <td>Guard per month</td>
+        <td><?php  echo $row->Guard_Month;?> Guards</td>
+        <td><?php  echo $row->Month;?> Months</td>
+        <td>RM60000 Per month</td>
+        <td style="text-align:right;"><?php  echo $row->Month_Price;?></td>
+    </tr>
+    <tr>
 </table>
 </div>
 </div>
+    
+    <?php }} ?>
     <div class="row">
-    <div >
-        <button class="btn btn-danger delete" id="removeRows" type="button">- Delete</button>
-        <button class="btn btn-success" id="addRows" type="button">+ Add More</button>
-    </div>
-    </div>
-
-    <div class="row">
-    <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8">
+    <div class="col-xs-12 col-sm-8 col-md-8 col-lg-10">
 <h3>Notes: </h3>
     <div class="form-group">
-        <textarea class="form-control txt" rows="5" name="notes" id="notes" placeholder="Your Notes"></textarea>
+        <textarea class="form-control txt" rows="2" name="notes" id="notes" placeholder="Your Notes"></textarea>
     </div>
 <br>
     <div class="form-group">
@@ -121,38 +144,39 @@ foreach($results as $row){
     </div>
     </div>
 
-    <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+
+    <div  class="col-xs-12 col-sm-4 col-md-4 col-lg-2">
     <span class="form-inline">
     <div class="form-group">
         <label>Subtotal:  </label>
             <div class="input-group">
-            <div class="input-group-addon currency">RM</div>
-                <input value="" type="number" class="form-control" name="subTotal" id="subTotal" placeholder="Subtotal">
+            <div >RM <?php  echo $row->SubTotal;?></div>
+                
     </div>
     </div>
 
 <div class="form-group">
-<label>Tax Rate:  </label>
-<div class="input-group">
-<input value="" type="number" class="form-control" name="taxRate" id="taxRate" placeholder="Tax Rate">
-<div class="input-group-addon">%</div>
-</div>
+        <label>Tax Rate:  </label>
+            <div class="input-group">
+            
+        <div>5%</div>
+        </div>
 </div>
 
 <div class="form-group">
-<label>Total:  </label>
-<div class="input-group">
-<div class="input-group-addon currency">RM</div>
-<input value="" type="number" class="form-control" name="totalAftertax" id="totalAftertax" placeholder="Total">
-</div>
-</div>
-
-</div>
-</span>
-</div>
+        <label>Total:  </label>
+            <div class="input-group">
+            <div style="font-weight: bold;font-size:larger">RM <?php  echo $row->SubTotal+($row->SubTotal*5/100);?></div>
+       
+        </div>
 </div>
 
+        </div>
+    </div>
 </div>
+
 </form>
 </div>
-<?php }}  ?>
+</body>
+</html>
+<?php $cnt=$cnt+1;}}  ?>
